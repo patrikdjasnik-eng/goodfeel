@@ -39,10 +39,14 @@ Aktuálně obsahuje:
 
 ### Demo účet
 
-```text
+text
 E-mail: demo@goodfeel.local
 Heslo: goodfeel
-```
+
+
+<img width="1672" height="941" alt="goodfeel home page" src="https://github.com/user-attachments/assets/4cdbb3f7-0546-44a4-84ef-c01d1294097d" />
+
+<img width="1672" height="941" alt="good feel login" src="https://github.com/user-attachments/assets/2ffe2421-4148-469f-aef0-5a185e466807" />
 
 Registrace funguje také. Účty vytvořené v MVP zůstávají pouze v daném prohlížeči.
 
