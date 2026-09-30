@@ -4,6 +4,7 @@ import {
   getSession,
   initializeStorage,
   loadFeed,
+  deleteFeedItem,
   logout,
   saveFeedItem,
   updateFeedItem
@@ -72,6 +73,18 @@ function App() {
     );
   }, []);
 
+  const handleUpdate = useCallback(async (item: FeedItem) => {
+    await updateFeedItem(item);
+    setFeed((current) =>
+      current.map((currentItem) => (currentItem.id === item.id ? item : currentItem))
+    );
+  }, []);
+
+  const handleDelete = useCallback(async (itemId: string) => {
+    await deleteFeedItem(itemId);
+    setFeed((current) => current.filter((item) => item.id !== itemId));
+  }, []);
+
   const handleLogout = useCallback(() => {
     logout();
     setUser(null);
@@ -116,8 +129,10 @@ function App() {
         <Dashboard
           feed={feed}
           onCreate={handleCreate}
+          onDelete={handleDelete}
           onLike={handleLike}
           onLogout={handleLogout}
+          onUpdate={handleUpdate}
           user={user}
         />
       ) : (
