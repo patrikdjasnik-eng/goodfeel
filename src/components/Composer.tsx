@@ -21,6 +21,7 @@ import type { WorkmojiDefinition } from '../workmoji/catalog';
 import { WorkmojiMark } from './WorkmojiMark';
 import { WorkmojiPicker } from './WorkmojiPicker';
 import { WorkmojiText } from './WorkmojiText';
+import { AvatarToken } from './AvatarToken';
 
 interface ComposerProps {
   user: UserProfile;
@@ -164,7 +165,7 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
         onClick={() => setExpanded(true)}
         type="button"
       >
-        <span className="avatar avatar-large">{user.name.slice(0, 1).toUpperCase()}</span>
+        <AvatarToken name={user.name} size="lg" />
         <span className="composer-collapsed-copy">
           <strong>Co dnes tvoříte?</strong>
           <small>Sdílejte myšlenku, projekt nebo novou příležitost.</small>
@@ -180,7 +181,7 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
   return (
     <form className="composer composer-expanded" onSubmit={submit}>
       <div className="composer-head">
-        <span className="avatar avatar-large">{user.name.slice(0, 1).toUpperCase()}</span>
+        <AvatarToken name={user.name} size="lg" />
         <div>
           <strong>Co dnes tvoříte?</strong>
           <span>Myšlenka → projekt → příležitost</span>
