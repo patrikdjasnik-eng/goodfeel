@@ -20,6 +20,7 @@ import type { ContentKind, FeedItem, UserProfile } from '../types';
 import type { WorkmojiDefinition } from '../workmoji/catalog';
 import { WorkmojiMark } from './WorkmojiMark';
 import { WorkmojiPicker } from './WorkmojiPicker';
+import { WorkmojiText } from './WorkmojiText';
 
 interface ComposerProps {
   user: UserProfile;
@@ -216,6 +217,13 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
         rows={kind === 'post' ? 2 : 3}
         value={body}
       />
+
+      {body.includes(':gf-') && (
+        <div className="composer-workmoji-preview">
+          <span>Náhled</span>
+          <p><WorkmojiText text={body} /></p>
+        </div>
+      )}
 
       <div className="composer-footer">
         <div className="workmoji-anchor" ref={workmojiAnchorRef}>
