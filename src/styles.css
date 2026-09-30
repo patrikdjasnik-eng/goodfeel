@@ -1216,7 +1216,8 @@ textarea::-moz-selection {
 }
 
 .composer {
-  overflow: hidden;
+  position: relative;
+  overflow: visible;
   border: 0;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -1350,6 +1351,205 @@ textarea::-moz-selection {
   background: transparent;
   color: #aaa5b5;
   font-size: 0.72rem;
+}
+
+.workmoji-mark {
+  display: block;
+  flex: 0 0 auto;
+  overflow: visible;
+  filter:
+    drop-shadow(0 5px 12px rgba(105, 77, 227, 0.18))
+    drop-shadow(0 0 7px rgba(91, 190, 255, 0.05));
+}
+
+.workmoji-anchor {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.workmoji-trigger {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 9px;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #797486;
+  font-size: 0.67rem;
+  font-weight: 760;
+  transition:
+    border-color 150ms ease,
+    background 150ms ease,
+    color 150ms ease;
+}
+
+.workmoji-trigger:hover,
+.workmoji-trigger.active {
+  border-color: rgba(123, 101, 255, 0.13);
+  background: rgba(126, 91, 255, 0.055);
+  color: #aaa0c8;
+}
+
+.workmoji-picker {
+  position: absolute;
+  bottom: calc(100% + 12px);
+  left: 0;
+  z-index: 60;
+  display: grid;
+  width: min(540px, 72vw);
+  max-height: 430px;
+  overflow: hidden;
+  border: 1px solid rgba(139, 108, 255, 0.16);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 94% 4%, rgba(127, 91, 255, 0.11), transparent 12rem),
+    rgba(12, 15, 27, 0.985);
+  box-shadow:
+    0 24px 70px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  backdrop-filter: blur(24px);
+}
+
+.workmoji-picker-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 16px 16px 12px;
+}
+
+.workmoji-picker-head > div {
+  display: grid;
+  gap: 3px;
+}
+
+.workmoji-picker-head strong {
+  color: #e8e3f2;
+  font-size: 0.82rem;
+}
+
+.workmoji-picker-head span {
+  color: #6e697a;
+  font-size: 0.65rem;
+}
+
+.workmoji-close {
+  display: inline-grid;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  place-items: center;
+  border-radius: 9px;
+  background: transparent;
+  color: #6e697b;
+}
+
+.workmoji-close:hover {
+  background: rgba(255, 255, 255, 0.035);
+  color: #aaa5b6;
+}
+
+.workmoji-tabs {
+  display: flex;
+  gap: 3px;
+  padding: 0 12px 10px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.workmoji-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.workmoji-tabs button {
+  min-height: 30px;
+  flex: 0 0 auto;
+  padding: 0 9px;
+  border-radius: 8px;
+  background: transparent;
+  color: #686475;
+  font-size: 0.63rem;
+  font-weight: 760;
+  white-space: nowrap;
+}
+
+.workmoji-tabs button:hover {
+  color: #a29caf;
+}
+
+.workmoji-tabs button.active {
+  background: rgba(126, 91, 255, 0.09);
+  color: #b6a7ef;
+}
+
+.workmoji-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 5px;
+  max-height: 315px;
+  padding: 8px 12px 14px;
+  overflow-y: auto;
+}
+
+.workmoji-option {
+  display: grid;
+  min-width: 0;
+  min-height: 82px;
+  place-items: center;
+  align-content: center;
+  gap: 6px;
+  padding: 8px 5px;
+  border: 1px solid transparent;
+  border-radius: 13px;
+  background: transparent;
+  color: #797486;
+  transition:
+    border-color 140ms ease,
+    background 140ms ease,
+    transform 140ms ease;
+}
+
+.workmoji-option:hover,
+.workmoji-option:focus-visible {
+  transform: translateY(-1px);
+  border-color: rgba(123, 101, 255, 0.13);
+  background:
+    radial-gradient(circle at 50% 25%, rgba(104, 176, 255, 0.055), transparent 3.5rem),
+    rgba(126, 91, 255, 0.045);
+}
+
+.workmoji-option span {
+  width: 100%;
+  overflow: hidden;
+  color: #817b8e;
+  font-size: 0.61rem;
+  font-weight: 700;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.workmoji-option:hover span,
+.workmoji-option:focus-visible span {
+  color: #b1aabd;
+}
+
+.workmoji-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 2px;
+  vertical-align: -5px;
+}
+
+.workmoji-inline .workmoji-mark {
+  transition: transform 140ms ease;
+}
+
+.feed-content p:hover .workmoji-inline .workmoji-mark {
+  transform: translateY(-1px);
 }
 
 .composer-footer > span {
@@ -1957,6 +2157,26 @@ textarea::-moz-selection {
 }
 
 @media (max-width: 560px) {
+  .workmoji-trigger {
+    width: 36px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .workmoji-trigger > span {
+    display: none;
+  }
+
+  .workmoji-picker {
+    left: -8px;
+    width: calc(100vw - 28px);
+    max-height: 410px;
+  }
+
+  .workmoji-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .sidebar .brand-tagline {
     display: none;
   }
