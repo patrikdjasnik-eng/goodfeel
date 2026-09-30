@@ -11,7 +11,7 @@ interface BrandLockupProps {
 export const BrandMark = memo(({ className = '' }: BrandMarkProps) => {
   const id = useId().replace(/:/g, '');
   const mainGradientId = `goodfeel-main-${id}`;
-  const glowGradientId = `goodfeel-glow-${id}`;
+  const flowGradientId = `goodfeel-flow-${id}`;
 
   return (
     <svg
@@ -24,59 +24,60 @@ export const BrandMark = memo(({ className = '' }: BrandMarkProps) => {
         <linearGradient
           id={mainGradientId}
           x1="11"
-          x2="55"
-          y1="8"
-          y2="58"
+          x2="54"
+          y1="7"
+          y2="57"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stopColor="#b06cff" />
-          <stop offset="0.48" stopColor="#7748ff" />
-          <stop offset="1" stopColor="#4e42ff" />
+          <stop offset="0" stopColor="#bd75ff" />
+          <stop offset="0.38" stopColor="#8b54ff" />
+          <stop offset="0.72" stopColor="#6848ff" />
+          <stop offset="1" stopColor="#5542ff" />
         </linearGradient>
 
         <linearGradient
-          id={glowGradientId}
-          x1="12"
-          x2="45"
-          y1="45"
-          y2="56"
+          id={flowGradientId}
+          x1="13"
+          x2="44"
+          y1="43"
+          y2="52"
           gradientUnits="userSpaceOnUse"
         >
-          <stop offset="0" stopColor="#5de8ff" />
-          <stop offset="0.55" stopColor="#58a8ff" />
-          <stop offset="1" stopColor="#7267ff" />
+          <stop offset="0" stopColor="#67e4ff" />
+          <stop offset="0.46" stopColor="#55b7ff" />
+          <stop offset="1" stopColor="#6869ff" />
         </linearGradient>
       </defs>
 
       <circle
-        cx="30"
-        cy="33"
+        cx="29.5"
+        cy="33.5"
         fill="none"
         r="20"
         stroke={`url(#${mainGradientId})`}
-        strokeDasharray="104 22"
+        strokeDasharray="101 25"
         strokeLinecap="round"
-        strokeWidth="10.5"
-        transform="rotate(-27 30 33)"
+        strokeWidth="10.8"
+        transform="rotate(-26 29.5 33.5)"
       />
 
       <path
-        d="M18 43.5C23.5 49 31 51.3 38.6 48.6C42.2 47.3 45.4 45.1 47.8 42.2"
+        d="M17.2 43.3C22.8 49 30.8 51.5 38.7 48.9C42.3 47.7 45.5 45.7 48.1 42.9"
         fill="none"
-        stroke={`url(#${glowGradientId})`}
+        stroke={`url(#${flowGradientId})`}
         strokeLinecap="round"
-        strokeWidth="4.2"
+        strokeWidth="4.4"
       />
 
       <path
-        d="M34.8 31.7H48.7"
+        d="M34.2 31.6H47.8"
         fill="none"
         stroke={`url(#${mainGradientId})`}
         strokeLinecap="round"
-        strokeWidth="6.5"
+        strokeWidth="6.7"
       />
 
-      <circle cx="50.8" cy="12.2" fill={`url(#${mainGradientId})`} r="4.5" />
+      <circle cx="50.7" cy="12.2" fill={`url(#${mainGradientId})`} r="4.3" />
     </svg>
   );
 });
@@ -87,10 +88,13 @@ export const BrandLockup = memo(({ compact = false }: BrandLockupProps) => (
   <div className={`brand-lockup ${compact ? 'brand-lockup-compact' : ''}`.trim()}>
     <BrandMark />
     <div className="brand-copy">
-      <strong>Goodfeel</strong>
-      <span>
+      <div className="brand-name" aria-label="Goodfeel">
+        <span className="brand-name-good">Good</span>
+        <span className="brand-name-feel">feel</span>
+      </div>
+      <div className="brand-tagline">
         People. Work. Progress. <b aria-hidden="true">+</b>
-      </span>
+      </div>
     </div>
   </div>
 ));
