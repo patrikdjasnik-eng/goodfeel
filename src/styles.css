@@ -1027,6 +1027,10 @@ textarea::-moz-selection {
   .feature-list article:nth-child(n + 3) {
     display: none;
   }
+
+  .auth-signal-card {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (max-width: 980px) {
@@ -1085,7 +1089,8 @@ textarea::-moz-selection {
   }
 
   .auth-proof-row,
-  .feature-list {
+  .feature-list,
+  .auth-signal-card {
     display: none;
   }
 
