@@ -1,5 +1,13 @@
 import { FormEvent, memo, useCallback, useMemo, useState } from 'react';
-import { Briefcase, FolderKanban, Send, Sparkles, Wrench } from 'lucide-react';
+import {
+  Briefcase,
+  ChevronUp,
+  FolderKanban,
+  Plus,
+  Send,
+  Sparkles,
+  Wrench
+} from 'lucide-react';
 import type { ContentKind, FeedItem, UserProfile } from '../types';
 
 interface ComposerProps {
@@ -15,6 +23,7 @@ const labels: Record<ContentKind, string> = {
 };
 
 export const Composer = memo(({ user, onCreate }: ComposerProps) => {
+  const [expanded, setExpanded] = useState(false);
   const [kind, setKind] = useState<ContentKind>('post');
   const [title, setTitle] = useState('');
   const [body, setBody] = useState('');
@@ -59,6 +68,8 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
         setTitle('');
         setBody('');
         setTags('');
+        setKind('post');
+        setExpanded(false);
       } finally {
         setBusy(false);
       }
@@ -66,8 +77,28 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
     [body, kind, onCreate, tags, title, user]
   );
 
+  if (!expanded) {
+    return (
+      <button
+        className="composer-collapsed surface"
+        onClick={() => setExpanded(true)}
+        type="button"
+      >
+        <span className="avatar avatar-large">{user.name.slice(0, 1).toUpperCase()}</span>
+        <span className="composer-collapsed-copy">
+          <strong>Co dnes tvoříte?</strong>
+          <small>Sdílejte myšlenku, projekt nebo novou příležitost.</small>
+        </span>
+        <span className="composer-collapsed-action">
+          <Plus size={18} />
+          Vytvořit
+        </span>
+      </button>
+    );
+  }
+
   return (
-    <form className="composer surface" onSubmit={submit}>
+    <form className="composer composer-expanded surface" onSubmit={submit}>
       <div className="composer-head">
         <span className="avatar avatar-large">{user.name.slice(0, 1).toUpperCase()}</span>
         <div>
@@ -75,6 +106,14 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
           <span>Myšlenka → projekt → příležitost</span>
         </div>
         <Sparkles className="composer-spark" size={21} />
+        <button
+          aria-label="Sbalit editor"
+          className="composer-collapse"
+          onClick={() => setExpanded(false)}
+          type="button"
+        >
+          <ChevronUp size={18} />
+        </button>
       </div>
 
       <div className="composer-kinds" role="tablist" aria-label="Typ nového obsahu">
