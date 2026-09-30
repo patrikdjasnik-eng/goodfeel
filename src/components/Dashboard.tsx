@@ -157,11 +157,36 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
         <div className="dashboard-grid">
           <section className="feed-column">
             <div className="space-header">
-              <div>
-                <span className="space-eyebrow">Tvůj prostor</span>
-                <h1>Vítej zpět, {firstName}.</h1>
-                <p>Pokračuj tam, kde jsi skončil. Tvoje práce, lidé a nové příležitosti jsou tady.</p>
+              <div className="space-header-copy">
+                <span className="space-eyebrow">
+                  <Sparkles size={14} />
+                  Tvůj prostor
+                </span>
+
+                <h1>
+                  Vítej zpět, <span>{firstName}.</span>
+                </h1>
+
+                <p>
+                  Pokračuj tam, kde jsi skončil. Tvoje práce, lidé a nové příležitosti jsou tady.
+                </p>
+
+                <div className="space-pulse" aria-label="Přehled tvého prostoru">
+                  <span><strong>{userProjects}</strong> projektů</span>
+                  <i />
+                  <span><strong>{proofProjects.length}</strong> ověřené</span>
+                  <i />
+                  <span><strong>{visibleFeed.length}</strong> nové v prostoru</span>
+                </div>
               </div>
+
+              <div className="space-ambient" aria-hidden="true">
+                <span className="space-ambient-orbit space-ambient-orbit-one" />
+                <span className="space-ambient-orbit space-ambient-orbit-two" />
+                <span className="space-ambient-core" />
+                <span className="space-ambient-dot" />
+              </div>
+
               <span className="space-status"><i /> Všechno je na svém místě</span>
             </div>
 
