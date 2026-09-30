@@ -1,10 +1,12 @@
 import { demoFeed, demoUser } from '../data/demo';
-import type { AccountRecord, FeedItem, UserProfile } from '../types';
+import type { AccountRecord, DirectMessage, FeedItem, UserProfile } from '../types';
 
 const databaseName = 'goodfeel-mvp';
-const databaseVersion = 1;
+const databaseVersion = 2;
 const accountStore = 'accounts';
 const feedStore = 'feed';
+const messageStore = 'messages';
+const identityStore = 'message-identities';
 const sessionKey = 'goodfeel.session';
 
 const openDatabase = (): Promise<IDBDatabase> =>
@@ -20,6 +22,17 @@ const openDatabase = (): Promise<IDBDatabase> =>
 
       if (!database.objectStoreNames.contains(feedStore)) {
         database.createObjectStore(feedStore, { keyPath: 'id' });
+      }
+
+      if (!database.objectStoreNames.contains(messageStore)) {
+        const store = database.createObjectStore(messageStore, { keyPath: 'id' });
+        store.createIndex('senderId', 'senderId', { unique: false });
+        store.createIndex('recipientId', 'recipientId', { unique: false });
+        store.createIndex('createdAt', 'createdAt', { unique: false });
+      }
+
+      if (!database.objectStoreNames.contains(identityStore)) {
+        database.createObjectStore(identityStore, { keyPath: 'userId' });
       }
     };
 
@@ -77,6 +90,206 @@ const getAllRecords = async <T>(storeName: string): Promise<T[]> => {
   return result;
 };
 
+
+
+interface MessageIdentityRecord {
+  userId: string;
+  privateKey: CryptoKey;
+  publicKeyJwk: JsonWebKey;
+}
+
+const bytesToBase64 = (bytes: Uint8Array): string => {
+  let binary = '';
+
+  bytes.forEach((value) => {
+    binary += String.fromCharCode(value);
+  });
+
+  return btoa(binary);
+};
+
+const base64ToBytes = (value: string): Uint8Array => {
+  const binary = atob(value);
+
+  return Uint8Array.from(binary, (character) => character.charCodeAt(0));
+};
+
+const ensureMessageIdentity = async (userId: string): Promise<MessageIdentityRecord> => {
+  const existing = await getRecord<MessageIdentityRecord>(identityStore, userId);
+
+  if (existing) {
+    return existing;
+  }
+
+  const keyPair = await crypto.subtle.generateKey(
+    {
+      name: 'ECDH',
+      namedCurve: 'P-256'
+    },
+    false,
+    ['deriveKey']
+  );
+
+  const publicKeyJwk = await crypto.subtle.exportKey('jwk', keyPair.publicKey);
+  const record: MessageIdentityRecord = {
+    userId,
+    privateKey: keyPair.privateKey,
+    publicKeyJwk
+  };
+
+  await putRecord(identityStore, record);
+  return record;
+};
+
+const deriveConversationKey = async (
+  ownIdentity: MessageIdentityRecord,
+  otherPublicKeyJwk: JsonWebKey
+): Promise<CryptoKey> => {
+  const otherPublicKey = await crypto.subtle.importKey(
+    'jwk',
+    otherPublicKeyJwk,
+    {
+      name: 'ECDH',
+      namedCurve: 'P-256'
+    },
+    false,
+    []
+  );
+
+  return crypto.subtle.deriveKey(
+    {
+      name: 'ECDH',
+      public: otherPublicKey
+    },
+    ownIdentity.privateKey,
+    {
+      name: 'AES-GCM',
+      length: 256
+    },
+    false,
+    ['encrypt', 'decrypt']
+  );
+};
+
+const blockedMessagePatterns: ReadonlyArray<RegExp> = [
+  /\b(child\s*(porn|sexual|abuse)|csam)\b/i,
+  /\b(dětsk(?:á|é|ou)\s*pornograf(?:ie|ii)|sexuální\s*zneužívání\s*dětí)\b/i,
+  /\b(hire\s+(a\s+)?hitman|contract\s+killing)\b/i,
+  /\b(najmout\s+vraha|vražda\s+na\s+objednávku)\b/i
+];
+
+export const validateMessageContent = (message: string): void => {
+  const normalized = message.trim();
+
+  if (!normalized) {
+    throw new Error('Zpráva je prázdná.');
+  }
+
+  if (normalized.length > 4000) {
+    throw new Error('Zpráva je příliš dlouhá.');
+  }
+
+  if (blockedMessagePatterns.some((pattern) => pattern.test(normalized))) {
+    throw new Error('Tuhle zprávu nelze odeslat přes Goodfeel.');
+  }
+};
+
+export const loadPublicProfiles = async (): Promise<UserProfile[]> => {
+  const accounts = await getAllRecords<AccountRecord>(accountStore);
+
+  return accounts.map(({ passwordHash: _passwordHash, ...profile }) => profile);
+};
+
+export const deleteFeedItem = async (itemId: string): Promise<void> => {
+  const database = await openDatabase();
+
+  await new Promise<void>((resolve, reject) => {
+    const transaction = database.transaction(feedStore, 'readwrite');
+    transaction.objectStore(feedStore).delete(itemId);
+    transaction.oncomplete = () => resolve();
+    transaction.onerror = () => reject(transaction.error ?? new Error('Smazání příspěvku selhalo.'));
+  });
+
+  database.close();
+};
+
+export const saveEncryptedMessage = async (
+  senderId: string,
+  recipientId: string,
+  plaintext: string
+): Promise<DirectMessage> => {
+  validateMessageContent(plaintext);
+
+  const senderIdentity = await ensureMessageIdentity(senderId);
+  const recipientIdentity = await ensureMessageIdentity(recipientId);
+  const conversationKey = await deriveConversationKey(senderIdentity, recipientIdentity.publicKeyJwk);
+  const iv = crypto.getRandomValues(new Uint8Array(12));
+  const encoded = new TextEncoder().encode(plaintext.trim());
+  const encrypted = await crypto.subtle.encrypt(
+    {
+      name: 'AES-GCM',
+      iv
+    },
+    conversationKey,
+    encoded
+  );
+
+  const message: DirectMessage = {
+    id: crypto.randomUUID(),
+    senderId,
+    recipientId,
+    ciphertext: bytesToBase64(new Uint8Array(encrypted)),
+    iv: bytesToBase64(iv),
+    createdAt: new Date().toISOString()
+  };
+
+  await putRecord(messageStore, message);
+  return message;
+};
+
+export const loadConversation = async (
+  currentUserId: string,
+  otherUserId: string
+): Promise<DirectMessage[]> => {
+  const messages = await getAllRecords<DirectMessage>(messageStore);
+
+  return messages
+    .filter(
+      (message) =>
+        (message.senderId === currentUserId && message.recipientId === otherUserId) ||
+        (message.senderId === otherUserId && message.recipientId === currentUserId)
+    )
+    .sort(
+      (first, second) =>
+        new Date(first.createdAt).getTime() - new Date(second.createdAt).getTime()
+    );
+};
+
+export const decryptMessage = async (
+  message: DirectMessage,
+  currentUserId: string
+): Promise<string> => {
+  if (currentUserId !== message.senderId && currentUserId !== message.recipientId) {
+    throw new Error('K této zprávě nemáte přístup.');
+  }
+
+  const otherUserId =
+    currentUserId === message.senderId ? message.recipientId : message.senderId;
+  const ownIdentity = await ensureMessageIdentity(currentUserId);
+  const otherIdentity = await ensureMessageIdentity(otherUserId);
+  const conversationKey = await deriveConversationKey(ownIdentity, otherIdentity.publicKeyJwk);
+  const decrypted = await crypto.subtle.decrypt(
+    {
+      name: 'AES-GCM',
+      iv: base64ToBytes(message.iv)
+    },
+    conversationKey,
+    base64ToBytes(message.ciphertext)
+  );
+
+  return new TextDecoder().decode(decrypted);
+};
+
 export const initializeStorage = async (): Promise<void> => {
   const existingDemo = await getRecord<AccountRecord>(accountStore, demoUser.email);
 
@@ -86,6 +299,8 @@ export const initializeStorage = async (): Promise<void> => {
       passwordHash: await hashPassword('goodfeel')
     });
   }
+
+  await ensureMessageIdentity(demoUser.id);
 
   const currentFeed = await getAllRecords<FeedItem>(feedStore);
 
@@ -168,6 +383,8 @@ export const register = async (
     ...user,
     passwordHash: await hashPassword(password)
   });
+
+  await ensureMessageIdentity(user.id);
 
   localStorage.setItem(sessionKey, JSON.stringify(user));
   return user;
