@@ -25,6 +25,7 @@ import { Composer } from './Composer';
 import { FeedCard } from './FeedCard';
 import { BrandLockup } from './Brand';
 import { MessagesView } from './MessagesView';
+import { AvatarToken } from './AvatarToken';
 
 interface DashboardProps {
   user: UserProfile;
@@ -172,7 +173,7 @@ export const Dashboard = memo(({
           </label>
           <div className="topbar-actions">
             <button className="icon-button" type="button"><Bell size={20} /></button>
-            <span className="avatar">{user.name.slice(0, 1).toUpperCase()}</span>
+            <AvatarToken name={user.name} size="sm" />
             <button className="logout-button" onClick={onLogout} type="button">
               <LogOut size={17} />
               <span>Odhlásit</span>
@@ -268,7 +269,7 @@ export const Dashboard = memo(({
             <aside className="right-column">
               <section className="profile-card">
                 <div className="profile-topline">
-                  <span className="avatar avatar-xl">{user.name.slice(0, 1).toUpperCase()}</span>
+                  <AvatarToken name={user.name} online size="xl" />
                   <span className="status-dot">Online</span>
                 </div>
                 <h2>{user.name}</h2>
