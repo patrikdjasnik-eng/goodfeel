@@ -1,5 +1,16 @@
 # DEV-NOTES
 
+<p>
+  <img src="./public/goodfeel-badge.svg" alt="Goodfeel DEV Notes" height="36" />
+</p>
+
+<p>
+  <img src="https://img.shields.io/badge/Branch-dev%2Ffirst--runnable-14192B?style=flat-square&logo=git&logoColor=9A7BFF" alt="Branch dev/first-runnable" />
+  <img src="https://img.shields.io/badge/Status-Active%20Development-14192B?style=flat-square&logo=github&logoColor=61D7A1" alt="Active Development" />
+  <img src="https://img.shields.io/badge/Focus-Workmoji%20%7C%20Feed%20%7C%20E2EE%20Messages-14192B?style=flat-square&logo=protonmail&logoColor=9A7BFF" alt="Workmoji Feed E2EE Messages" />
+  <img src="https://img.shields.io/badge/Updated-2026--09--30-14192B?style=flat-square&logo=markdown&logoColor=61DAFB" alt="Updated 2026-09-30" />
+</p>
+
 Vývojový deník projektu Goodfeel  
 Větev: `dev/first-runnable`  
 Datum: 2026-09-30
