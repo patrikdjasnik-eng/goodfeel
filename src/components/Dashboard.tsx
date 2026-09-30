@@ -23,6 +23,7 @@ import {
 import type { FeedItem, UserProfile } from '../types';
 import { Composer } from './Composer';
 import { FeedCard } from './FeedCard';
+import { BrandLockup } from './Brand';
 
 interface DashboardProps {
   user: UserProfile;
@@ -79,15 +80,7 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
     <div className="app-shell">
       <aside className={`sidebar ${mobileMenuOpen ? 'open' : ''}`}>
         <div className="sidebar-top">
-          <div className="brand-row compact-brand">
-            <span className="brand-mark" aria-hidden="true">
-              <span />
-            </span>
-            <div>
-              <strong>Goodfeel</strong>
-              <small>People. Work. Progress.</small>
-            </div>
-          </div>
+          <BrandLockup compact />
           <button className="mobile-close icon-button" onClick={closeMobileMenu} type="button">
             <X size={21} />
           </button>
