@@ -1,0 +1,17 @@
+{
+  "name": "Goodfeel",
+  "short_name": "Goodfeel",
+  "description": "Sociální síť pro skutečnou práci, projekty a spolupráci.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#090d19",
+  "theme_color": "#6d4aff",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
