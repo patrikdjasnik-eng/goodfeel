@@ -28,7 +28,7 @@ export const WorkmojiText = memo(({ text }: WorkmojiTextProps) => {
             key={`${workmoji.id}-${index}`}
             title={workmoji.label}
           >
-            <WorkmojiMark id={workmoji.id as WorkmojiId} size={22} />
+            <WorkmojiMark id={workmoji.id as WorkmojiId} size={25} />
           </span>
         );
       })}
