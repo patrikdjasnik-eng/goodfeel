@@ -32,19 +32,18 @@ export const BrandMark = memo(({ className = '' }: BrandMarkProps) => {
         fill="none"
         r="18.5"
         stroke={`url(#${gradientId})`}
-        strokeDasharray="86 31"
+        strokeDasharray="98.5 18"
         strokeLinecap="round"
         strokeWidth="11.5"
-        transform="rotate(-41 29.5 35)"
-      />
+              />
 
       <ellipse
-        cx="48.5"
-        cy="15.5"
+        cx="51"
+        cy="12.5"
         fill={`url(#${gradientId})`}
-        rx="7"
-        ry="5.4"
-        transform="rotate(-37 48.5 15.5)"
+        rx="6"
+        ry="4.75"
+        transform="rotate(-37 51 12.5)"
       />
     </svg>
   );
