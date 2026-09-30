@@ -11,6 +11,7 @@ import {
 } from 'lucide-react';
 import type { UserProfile } from '../types';
 import { login, register } from '../lib/storage';
+import { BrandLockup } from './Brand';
 
 interface LoginScreenProps {
   onAuthenticated: (user: UserProfile) => void;
@@ -59,15 +60,7 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
   return (
     <main className="auth-shell">
       <section className="auth-pitch glass-panel">
-        <div className="brand-row">
-          <span className="brand-mark" aria-hidden="true">
-            <span />
-          </span>
-          <div>
-            <strong>Goodfeel</strong>
-            <small>People. Work. Progress.</small>
-          </div>
-        </div>
+        <BrandLockup />
 
         <div className="auth-copy">
           <p className="eyebrow">Sociální síť pro skutečnou práci</p>
