@@ -33,12 +33,15 @@ interface DashboardProps {
   onLogout: () => void;
 }
 
-const navigation = [
+const primaryNavigation = [
   { label: 'Domů', icon: Home },
   { label: 'Objevovat', icon: Compass },
   { label: 'Projekty', icon: FolderKanban },
+  { label: 'Práce', icon: Briefcase }
+];
+
+const secondaryNavigation = [
   { label: 'Služby', icon: Wrench },
-  { label: 'Práce', icon: Briefcase },
   { label: 'Zprávy', icon: MessageCircle },
   { label: 'Uložené', icon: Bookmark },
   { label: 'Komunity', icon: Users },
@@ -74,7 +77,25 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
     [feed, user.id]
   );
 
+  const firstName = useMemo(() => user.name.trim().split(/s+/)[0] || user.name, [user.name]);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
+
+  const renderNavigation = useCallback(
+    (items: typeof primaryNavigation, primary = false) =>
+      items.map(({ label, icon: Icon }, index) => (
+        <button
+          className={primary && index === 0 ? 'active' : ''}
+          key={label}
+          onClick={closeMobileMenu}
+          type="button"
+        >
+          <Icon size={20} />
+          <span>{label}</span>
+          {label === 'Zprávy' && <b>3</b>}
+        </button>
+      )),
+    [closeMobileMenu]
+  );
 
   return (
     <div className="app-shell">
@@ -87,13 +108,12 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
         </div>
 
         <nav className="side-nav" aria-label="Hlavní navigace">
-          {navigation.map(({ label, icon: Icon }, index) => (
-            <button className={index === 0 ? 'active' : ''} key={label} onClick={closeMobileMenu} type="button">
-              <Icon size={20} />
-              <span>{label}</span>
-              {label === 'Zprávy' && <b>3</b>}
-            </button>
-          ))}
+          <div className="side-nav-group side-nav-primary">
+            {renderNavigation(primaryNavigation, true)}
+          </div>
+          <div className="side-nav-group side-nav-secondary">
+            {renderNavigation(secondaryNavigation)}
+          </div>
         </nav>
 
         <div className="sidebar-cta">
@@ -138,6 +158,15 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
 
         <div className="dashboard-grid">
           <section className="feed-column">
+            <div className="space-header">
+              <div>
+                <span className="space-eyebrow">Tvůj prostor</span>
+                <h1>Vítej zpět, {firstName}.</h1>
+                <p>Pokračuj tam, kde jsi skončil. Tvoje práce, lidé a nové příležitosti jsou tady.</p>
+              </div>
+              <span className="space-status"><i /> Všechno je na svém místě</span>
+            </div>
+
             <Composer onCreate={onCreate} user={user} />
 
             <div className="feed-filters" role="tablist" aria-label="Filtr feedu">
