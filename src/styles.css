@@ -190,29 +190,41 @@ textarea::-moz-selection {
 
 .brand-copy {
   display: grid;
-  gap: 1px;
+  gap: 2px;
 }
 
-.brand-copy strong {
-  color: #f8f7ff;
+.brand-name {
+  display: inline-flex;
+  align-items: baseline;
   font-size: 1.52rem;
-  font-weight: 760;
-  letter-spacing: -0.045em;
-  line-height: 1.05;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 1;
 }
 
-.brand-copy span {
+.brand-name-good {
+  color: #fbfaff;
+}
+
+.brand-name-feel {
+  color: #9b6cff;
+}
+
+.brand-tagline {
   color: #8f8b9f;
-  font-size: 0.82rem;
+  font-size: 0.72rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
   line-height: 1.35;
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
-.brand-copy b {
+.brand-tagline b {
   margin-left: 3px;
-  color: #7650ff;
-  font-size: 1.08em;
-  font-weight: 800;
+  color: #7d55ff;
+  font-size: 1.22em;
+  font-weight: 900;
 }
 
 .brand-lockup-compact {
@@ -225,14 +237,14 @@ textarea::-moz-selection {
   flex-basis: 37px;
 }
 
-.brand-lockup-compact .brand-copy strong {
+.brand-lockup-compact .brand-name {
   font-size: 1.03rem;
-  letter-spacing: -0.025em;
+  letter-spacing: -0.03em;
 }
 
-.brand-lockup-compact .brand-copy span {
-  font-size: 0.68rem;
-  letter-spacing: 0.01em;
+.brand-lockup-compact .brand-tagline {
+  font-size: 0.52rem;
+  letter-spacing: 0.07em;
 }
 
 .eyebrow {
@@ -1520,7 +1532,7 @@ textarea::-moz-selection {
     display: none;
   }
 
-  .brand-copy span {
+  .brand-tagline {
     display: none;
   }
 
