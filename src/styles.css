@@ -3014,3 +3014,170 @@ textarea::-moz-selection {
   }
 }
 
+.avatar-token {
+  --avatar-size: 38px;
+  position: relative;
+  display: inline-grid;
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  flex: 0 0 var(--avatar-size);
+  place-items: center;
+  border-radius: 14px;
+  isolation: isolate;
+  transition:
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.avatar-token-sm {
+  --avatar-size: 34px;
+  border-radius: 12px;
+}
+
+.avatar-token-md {
+  --avatar-size: 38px;
+  border-radius: 14px;
+}
+
+.avatar-token-lg {
+  --avatar-size: 48px;
+  border-radius: 16px;
+}
+
+.avatar-token-xl {
+  --avatar-size: 62px;
+  border-radius: 20px;
+}
+
+.avatar-token-orbit,
+.avatar-token-core {
+  position: absolute;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+.avatar-token-orbit {
+  inset: 0;
+  border: 1px solid rgba(140, 118, 255, 0.18);
+  background:
+    radial-gradient(circle at 28% 24%, rgba(143, 117, 255, 0.22), transparent 42%),
+    linear-gradient(180deg, rgba(23, 26, 44, 0.98), rgba(10, 12, 22, 0.98));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 8px 20px rgba(32, 25, 70, 0.28),
+    0 0 16px rgba(101, 126, 255, 0.07);
+}
+
+.avatar-token-orbit::after {
+  content: "";
+  position: absolute;
+  inset: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.025);
+  border-radius: calc(100% - 4px);
+}
+
+.avatar-token-core {
+  inset: 4px;
+  background:
+    radial-gradient(circle at 36% 28%, rgba(255, 255, 255, 0.085), transparent 34%),
+    linear-gradient(180deg, rgba(27, 31, 52, 0.96), rgba(12, 15, 28, 0.98));
+  box-shadow: inset 0 -8px 18px rgba(0, 0, 0, 0.16);
+}
+
+.avatar-token-letter {
+  position: relative;
+  z-index: 2;
+  color: #eef1ff;
+  font-size: 0.82rem;
+  font-weight: 850;
+  letter-spacing: 0.02em;
+  text-shadow:
+    0 0 10px rgba(140, 142, 255, 0.2),
+    0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+.avatar-token-sm .avatar-token-letter {
+  font-size: 0.75rem;
+}
+
+.avatar-token-lg .avatar-token-letter {
+  font-size: 1rem;
+}
+
+.avatar-token-xl .avatar-token-letter {
+  font-size: 1.24rem;
+}
+
+.avatar-token-status {
+  position: absolute;
+  right: -1px;
+  bottom: -1px;
+  z-index: 4;
+  width: 11px;
+  height: 11px;
+  border: 2px solid #0b0f1b;
+  border-radius: 50%;
+  background: #62d7a5;
+  box-shadow:
+    0 0 0 1px rgba(98, 215, 165, 0.12),
+    0 0 12px rgba(98, 215, 165, 0.38);
+}
+
+.avatar-token-violet .avatar-token-orbit {
+  border-color: rgba(149, 113, 255, 0.22);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 8px 20px rgba(62, 40, 132, 0.3),
+    0 0 16px rgba(136, 104, 255, 0.08);
+}
+
+.avatar-token-blue .avatar-token-orbit {
+  border-color: rgba(93, 145, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 8px 20px rgba(28, 64, 126, 0.3),
+    0 0 16px rgba(91, 167, 255, 0.08);
+}
+
+.avatar-token-cyan .avatar-token-orbit {
+  border-color: rgba(88, 208, 255, 0.19);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 8px 20px rgba(24, 88, 111, 0.28),
+    0 0 16px rgba(98, 220, 255, 0.08);
+}
+
+.avatar-token.is-active {
+  transform: translateY(-1px) scale(1.035);
+  filter: brightness(1.06);
+}
+
+.avatar-token.is-active .avatar-token-orbit {
+  border-color: rgba(157, 133, 255, 0.38);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.085),
+    0 10px 24px rgba(69, 44, 154, 0.34),
+    0 0 20px rgba(116, 140, 255, 0.15);
+}
+
+.avatar-token.is-active .avatar-token-letter {
+  color: #fff;
+  text-shadow:
+    0 0 15px rgba(142, 146, 255, 0.3),
+    0 1px 2px rgba(0, 0, 0, 0.48);
+}
+
+.messages-contact-list > button:hover .avatar-token {
+  transform: translateY(-1px);
+}
+
+.messages-contact-list > button.active .avatar-token {
+  transform: translateY(-1px) scale(1.04);
+}
+
+.profile-topline .avatar-token {
+  filter:
+    drop-shadow(0 10px 22px rgba(86, 58, 180, 0.2))
+    drop-shadow(0 0 14px rgba(108, 146, 255, 0.07));
+}
+
