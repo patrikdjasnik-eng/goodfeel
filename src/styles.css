@@ -1334,6 +1334,37 @@ textarea::-moz-selection {
   line-height: 1.6;
 }
 
+
+.composer-workmoji-preview {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 10px;
+  align-items: start;
+  margin: 0 14px 10px;
+  padding: 10px 12px;
+  border: 1px solid rgba(112, 104, 255, 0.08);
+  border-radius: 11px;
+  background:
+    linear-gradient(90deg, rgba(126, 91, 255, 0.035), rgba(75, 151, 255, 0.018));
+}
+
+.composer-workmoji-preview > span {
+  color: #675f7a;
+  font-size: 0.6rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.composer-workmoji-preview p {
+  margin: 0;
+  color: #a9a3b4;
+  font-size: 0.77rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
 .composer-footer {
   display: flex;
   min-height: 50px;
