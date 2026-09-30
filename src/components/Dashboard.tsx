@@ -116,11 +116,9 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
           </div>
         </nav>
 
-        <div className="sidebar-cta">
-          <span><Sparkles size={17} /> Goodfeel</span>
-          <strong>Build what feels right.</strong>
-          <p>Ukaž práci. Najdi lidi. Vytvoř příležitost.</p>
-          <button type="button"><Plus size={18} /> Vytvořit</button>
+        <div className="sidebar-space">
+          <span><Sparkles size={16} /> Tvůj Goodfeel</span>
+          <button type="button"><Plus size={18} /> Nový obsah</button>
         </div>
       </aside>
 
@@ -199,7 +197,7 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
                 <FeedCard item={item} key={item.id} onLike={onLike} />
               ))}
               {visibleFeed.length === 0 && (
-                <div className="empty-state surface">
+                <div className="empty-state">
                   <Search size={28} />
                   <strong>Nic jsme nenašli</strong>
                   <span>Zkuste jiný výraz nebo jiný filtr.</span>
@@ -209,7 +207,7 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
           </section>
 
           <aside className="right-column">
-            <section className="profile-card surface">
+            <section className="profile-card">
               <div className="profile-topline">
                 <span className="avatar avatar-xl">{user.name.slice(0, 1).toUpperCase()}</span>
                 <span className="status-dot">Online</span>
@@ -225,7 +223,7 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
               </div>
             </section>
 
-            <section className="side-card surface">
+            <section className="side-card">
               <div className="card-title-row">
                 <h3><TrendingUp size={19} /> Trendy na Goodfeel</h3>
                 <button type="button">Vše</button>
@@ -238,7 +236,7 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
               </ol>
             </section>
 
-            <section className="side-card surface">
+            <section className="side-card">
               <div className="card-title-row">
                 <h3><ShieldCheck size={19} /> Proof of Work</h3>
                 <button type="button">Vše</button>
