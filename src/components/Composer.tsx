@@ -80,7 +80,7 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
   if (!expanded) {
     return (
       <button
-        className="composer-collapsed surface"
+        className="composer-collapsed"
         onClick={() => setExpanded(true)}
         type="button"
       >
@@ -98,7 +98,7 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
   }
 
   return (
-    <form className="composer composer-expanded surface" onSubmit={submit}>
+    <form className="composer composer-expanded" onSubmit={submit}>
       <div className="composer-head">
         <span className="avatar avatar-large">{user.name.slice(0, 1).toUpperCase()}</span>
         <div>
