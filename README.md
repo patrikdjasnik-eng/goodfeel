@@ -48,7 +48,6 @@ Aktuálně obsahuje:
 - základní PWA manifest a service worker,
 - mobilní layout,
 - bezpečnější dev režim bez stale service-worker cache,
-- CI kontrolu TypeScriptu a produkčního buildu.
 
 ### Demo účet
 
@@ -106,7 +105,7 @@ demo@goodfeel.local
 goodfeel
 ```
 
-Produkční kontrola buildu:
+Produkční build a lokální preview:
 
 ```bash
 npm run build
