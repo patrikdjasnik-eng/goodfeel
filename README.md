@@ -1,3 +1,5 @@
+<img width="1672" height="941" alt="good feel login" src="https://github.com/user-attachments/assets/2ffe2421-4148-469f-aef0-5a185e466807" />
+<img width="1672" height="941" alt="goodfeel home page" src="https://github.com/user-attachments/assets/4cdbb3f7-0546-44a4-84ef-c01d1294097d" />
 # Goodfeel
 
 Goodfeel je připravovaná sociální síť, která kombinuje rychlost a přirozenost konverzací ve stylu Threads s profesní hloubkou LinkedInu. Hlavní rozdíl je v důrazu na skutečnou práci: projekty, služby, pracovní příležitosti a reputaci postavenou na ověřitelných výsledcích.
