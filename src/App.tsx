@@ -7,7 +7,8 @@ import {
   deleteFeedItem,
   logout,
   saveFeedItem,
-  updateFeedItem
+  updateFeedItem,
+  updateOwnedFeedItem
 } from './lib/storage';
 import { registerServiceWorker } from './lib/pwa';
 import { BrandMark } from './components/Brand';
@@ -74,16 +75,30 @@ function App() {
   }, []);
 
   const handleUpdate = useCallback(async (item: FeedItem) => {
-    await updateFeedItem(item);
+    if (!user) return;
+
+    await updateOwnedFeedItem(item, user.id);
     setFeed((current) =>
-      current.map((currentItem) => (currentItem.id === item.id ? item : currentItem))
+      current.map((currentItem) =>
+        currentItem.id === item.id
+          ? {
+              ...item,
+              author: currentItem.author,
+              createdAt: currentItem.createdAt,
+              likes: currentItem.likes,
+              comments: currentItem.comments
+            }
+          : currentItem
+      )
     );
-  }, []);
+  }, [user]);
 
   const handleDelete = useCallback(async (itemId: string) => {
-    await deleteFeedItem(itemId);
+    if (!user) return;
+
+    await deleteFeedItem(itemId, user.id);
     setFeed((current) => current.filter((item) => item.id !== itemId));
-  }, []);
+  }, [user]);
 
   const handleLogout = useCallback(() => {
     logout();
