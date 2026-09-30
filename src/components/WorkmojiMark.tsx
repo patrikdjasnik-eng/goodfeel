@@ -1,5 +1,5 @@
 import { memo, useId, type ReactNode } from 'react';
-import type { WorkmojiId } from '../workmoji/catalog';
+import type { WorkmojiCategory, WorkmojiId } from '../workmoji/catalog';
 import { workmojiById } from '../workmoji/catalog';
 
 interface WorkmojiMarkProps {
@@ -8,6 +8,158 @@ interface WorkmojiMarkProps {
   className?: string;
   title?: string;
 }
+
+interface WorkmojiPalette {
+  mainStart: string;
+  mainEnd: string;
+  accentStart: string;
+  accentEnd: string;
+  soft: string;
+  shellStart: string;
+  shellEnd: string;
+}
+
+const categoryPalette: Record<WorkmojiCategory, WorkmojiPalette> = {
+  goodfeel: {
+    mainStart: '#c082ff',
+    mainEnd: '#684cff',
+    accentStart: '#6de8ff',
+    accentEnd: '#5c8dff',
+    soft: '#e9ddff',
+    shellStart: '#20173c',
+    shellEnd: '#10162a'
+  },
+  code: {
+    mainStart: '#9e72ff',
+    mainEnd: '#574bff',
+    accentStart: '#65ecff',
+    accentEnd: '#4f9cff',
+    soft: '#cfefff',
+    shellStart: '#151d35',
+    shellEnd: '#0b1121'
+  },
+  design: {
+    mainStart: '#d17fff',
+    mainEnd: '#7c58ff',
+    accentStart: '#72dfff',
+    accentEnd: '#a26dff',
+    soft: '#f0dcff',
+    shellStart: '#261630',
+    shellEnd: '#121323'
+  },
+  ai: {
+    mainStart: '#ae79ff',
+    mainEnd: '#5b5cff',
+    accentStart: '#75efff',
+    accentEnd: '#6488ff',
+    soft: '#d8ecff',
+    shellStart: '#171936',
+    shellEnd: '#0a1123'
+  },
+  cyber: {
+    mainStart: '#8b72ff',
+    mainEnd: '#4f56d8',
+    accentStart: '#5ff1d8',
+    accentEnd: '#50a7ff',
+    soft: '#c9fff4',
+    shellStart: '#10242e',
+    shellEnd: '#0a101d'
+  },
+  freelance: {
+    mainStart: '#c384ff',
+    mainEnd: '#6c54ed',
+    accentStart: '#78d9ff',
+    accentEnd: '#7b86ff',
+    soft: '#f1e6ff',
+    shellStart: '#241936',
+    shellEnd: '#111322'
+  },
+  operations: {
+    mainStart: '#9b73ff',
+    mainEnd: '#5360e8',
+    accentStart: '#67e7c9',
+    accentEnd: '#56a9ff',
+    soft: '#d9fff1',
+    shellStart: '#13242d',
+    shellEnd: '#0c1220'
+  },
+  community: {
+    mainStart: '#c27dff',
+    mainEnd: '#7650f0',
+    accentStart: '#72e3ff',
+    accentEnd: '#7c7dff',
+    soft: '#f3e9ff',
+    shellStart: '#25182f',
+    shellEnd: '#111320'
+  }
+};
+
+const renderShell = (
+  category: WorkmojiCategory,
+  shell: string,
+  shellEdge: string,
+  accent: string
+): ReactNode => {
+  switch (category) {
+    case 'goodfeel':
+      return (
+        <>
+          <circle cx="32" cy="32" r="27" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <path d="M15 21c8-12 26-15 36-5" fill="none" stroke="rgba(255,255,255,.13)" strokeWidth="2.2" strokeLinecap="round" />
+        </>
+      );
+    case 'code':
+      return (
+        <>
+          <rect x="6" y="6" width="52" height="52" rx="17" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <path d="M17 15h30" stroke="rgba(255,255,255,.09)" strokeWidth="2" strokeLinecap="round" />
+        </>
+      );
+    case 'design':
+      return (
+        <>
+          <rect x="7" y="7" width="50" height="50" rx="18" fill={shell} stroke={shellEdge} strokeWidth="1.4" transform="rotate(-7 32 32)" />
+          <circle cx="47" cy="17" r="3" fill={accent} opacity=".7" />
+        </>
+      );
+    case 'ai':
+      return (
+        <>
+          <circle cx="32" cy="32" r="26" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <ellipse cx="32" cy="32" rx="25" ry="12" fill="none" stroke={accent} strokeWidth="1.2" opacity=".22" transform="rotate(-18 32 32)" />
+        </>
+      );
+    case 'cyber':
+      return (
+        <>
+          <path d="M32 5 55 14v17c0 14-9 23-23 29C18 54 9 45 9 31V14L32 5Z" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <path d="M18 18 32 12l14 6" fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="2" strokeLinecap="round" />
+        </>
+      );
+    case 'freelance':
+      return (
+        <>
+          <path d="M12 17c8-9 32-11 41 1 8 11 3 29-8 36-10 7-29 5-36-6-7-10-5-22 3-31Z" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <circle cx="48" cy="18" r="3" fill={accent} opacity=".55" />
+        </>
+      );
+    case 'operations':
+      return (
+        <>
+          <path d="m32 5 23 13v28L32 59 9 46V18L32 5Z" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <path d="M17 20 32 12l15 8" fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="2" strokeLinecap="round" />
+        </>
+      );
+    case 'community':
+      return (
+        <>
+          <circle cx="25" cy="31" r="22" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
+          <circle cx="42" cy="33" r="17" fill={shell} stroke={shellEdge} strokeWidth="1.2" opacity=".92" />
+          <circle cx="47" cy="18" r="3" fill={accent} opacity=".65" />
+        </>
+      );
+  }
+};
 
 const renderGlyph = (
   id: WorkmojiId,
@@ -276,6 +428,7 @@ const renderGlyph = (
   }
 };
 
+
 export const WorkmojiMark = memo(({
   id,
   size = 28,
@@ -286,13 +439,17 @@ export const WorkmojiMark = memo(({
   const mainId = `wm-main-${uid}`;
   const accentId = `wm-accent-${uid}`;
   const softId = `wm-soft-${uid}`;
+  const shellId = `wm-shell-${uid}`;
+  const shellEdgeId = `wm-shell-edge-${uid}`;
   const workmoji = workmojiById.get(id);
+  const category = workmoji?.category ?? 'goodfeel';
+  const palette = categoryPalette[category];
   const label = title ?? workmoji?.label ?? 'Goodfeel Workmoji';
 
   return (
     <svg
       aria-label={label}
-      className={`workmoji-mark ${className}`.trim()}
+      className={`workmoji-mark workmoji-mark-${category} ${className}`.trim()}
       height={size}
       role="img"
       viewBox="0 0 64 64"
@@ -301,28 +458,53 @@ export const WorkmojiMark = memo(({
     >
       <defs>
         <linearGradient id={mainId} x1="9" x2="54" y1="8" y2="57" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#bd75ff" />
-          <stop offset=".5" stopColor="#8656ff" />
-          <stop offset="1" stopColor="#6048ff" />
+          <stop offset="0" stopColor={palette.mainStart} />
+          <stop offset="1" stopColor={palette.mainEnd} />
         </linearGradient>
         <linearGradient id={accentId} x1="11" x2="52" y1="50" y2="13" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#67e4ff" />
-          <stop offset=".52" stopColor="#55b7ff" />
-          <stop offset="1" stopColor="#7770ff" />
+          <stop offset="0" stopColor={palette.accentStart} />
+          <stop offset="1" stopColor={palette.accentEnd} />
         </linearGradient>
         <linearGradient id={softId} x1="12" x2="52" y1="14" y2="52" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#f0eaff" />
-          <stop offset=".45" stopColor="#b89cff" />
-          <stop offset="1" stopColor="#6fbfff" />
+          <stop offset="0" stopColor={palette.soft} />
+          <stop offset="1" stopColor={palette.accentEnd} />
+        </linearGradient>
+        <linearGradient id={shellId} x1="10" x2="54" y1="7" y2="58" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={palette.shellStart} />
+          <stop offset="1" stopColor={palette.shellEnd} />
+        </linearGradient>
+        <linearGradient id={shellEdgeId} x1="12" x2="52" y1="8" y2="58" gradientUnits="userSpaceOnUse">
+          <stop offset="0" stopColor={palette.mainStart} stopOpacity=".32" />
+          <stop offset=".55" stopColor={palette.accentStart} stopOpacity=".16" />
+          <stop offset="1" stopColor="#ffffff" stopOpacity=".05" />
         </linearGradient>
       </defs>
 
-      {renderGlyph(
-        id,
-        `url(#${mainId})`,
-        `url(#${accentId})`,
-        `url(#${softId})`
-      )}
+      <g className="workmoji-shell">
+        {renderShell(
+          category,
+          `url(#${shellId})`,
+          `url(#${shellEdgeId})`,
+          `url(#${accentId})`
+        )}
+      </g>
+
+      <g className="workmoji-glyph" transform="translate(7.7 7.7) scale(.76)">
+        {renderGlyph(
+          id,
+          `url(#${mainId})`,
+          `url(#${accentId})`,
+          `url(#${softId})`
+        )}
+      </g>
+
+      <path
+        d="M18 13c8-5 20-6 28-1"
+        fill="none"
+        stroke="rgba(255,255,255,.12)"
+        strokeLinecap="round"
+        strokeWidth="1.6"
+      />
     </svg>
   );
 });
