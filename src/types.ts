@@ -28,3 +28,21 @@ export interface FeedItem {
 export interface AccountRecord extends UserProfile {
   passwordHash: string;
 }
+
+export interface DirectMessage {
+  id: string;
+  senderId: string;
+  recipientId: string;
+  ciphertext: string;
+  iv: string;
+  createdAt: string;
+}
+
+export interface MessagePreview {
+  id: string;
+  senderId: string;
+  recipientId: string;
+  body: string;
+  createdAt: string;
+}
+
