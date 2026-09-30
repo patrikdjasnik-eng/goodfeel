@@ -24,12 +24,15 @@ import type { FeedItem, UserProfile } from '../types';
 import { Composer } from './Composer';
 import { FeedCard } from './FeedCard';
 import { BrandLockup } from './Brand';
+import { MessagesView } from './MessagesView';
 
 interface DashboardProps {
   user: UserProfile;
   feed: FeedItem[];
   onCreate: (item: FeedItem) => Promise<void>;
   onLike: (item: FeedItem) => Promise<void>;
+  onUpdate: (item: FeedItem) => Promise<void>;
+  onDelete: (itemId: string) => Promise<void>;
   onLogout: () => void;
 }
 
@@ -49,10 +52,19 @@ const secondaryNavigation = [
   { label: 'Profil', icon: User }
 ];
 
-export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: DashboardProps) => {
+export const Dashboard = memo(({
+  user,
+  feed,
+  onCreate,
+  onLike,
+  onUpdate,
+  onDelete,
+  onLogout
+}: DashboardProps) => {
   const [query, setQuery] = useState('');
   const [filter, setFilter] = useState<'all' | FeedItem['kind']>('all');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [view, setView] = useState<'feed' | 'messages'>('feed');
 
   const visibleFeed = useMemo(() => {
     const normalizedQuery = query.trim().toLocaleLowerCase('cs');
@@ -82,19 +94,33 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
 
   const renderNavigation = useCallback(
     (items: typeof primaryNavigation, primary = false) =>
-      items.map(({ label, icon: Icon }, index) => (
-        <button
-          className={primary && index === 0 ? 'active' : ''}
-          key={label}
-          onClick={closeMobileMenu}
-          type="button"
-        >
-          <Icon size={20} />
-          <span>{label}</span>
-          {label === 'Zprávy' && <b>3</b>}
-        </button>
-      )),
-    [closeMobileMenu]
+      items.map(({ label, icon: Icon }, index) => {
+        const isMessages = label === 'Zprávy';
+        const isActive = isMessages
+          ? view === 'messages'
+          : primary && index === 0 && view === 'feed';
+
+        return (
+          <button
+            className={isActive ? 'active' : ''}
+            key={label}
+            onClick={() => {
+              if (isMessages) {
+                setView('messages');
+              } else if (primary && index === 0) {
+                setView('feed');
+              }
+
+              closeMobileMenu();
+            }}
+            type="button"
+          >
+            <Icon size={20} />
+            <span>{label}</span>
+          </button>
+        );
+      }),
+    [closeMobileMenu, view]
   );
 
   return (
@@ -154,128 +180,145 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
           </div>
         </header>
 
-        <div className="dashboard-grid">
-          <section className="feed-column">
-            <div className="space-header">
-              <div className="space-header-copy">
-                <span className="space-eyebrow">
-                  <Sparkles size={14} />
-                  Tvůj prostor
-                </span>
-
-                <h1>
-                  Vítej zpět, <span>{firstName}.</span>
-                </h1>
-
-                <p>
-                  Pokračuj tam, kde jsi skončil. Tvoje práce, lidé a nové příležitosti jsou tady.
-                </p>
-
-                <div className="space-pulse" aria-label="Přehled tvého prostoru">
-                  <span><strong>{userProjects}</strong> projektů</span>
-                  <i />
-                  <span><strong>{proofProjects.length}</strong> ověřené</span>
-                  <i />
-                  <span><strong>{visibleFeed.length}</strong> nové v prostoru</span>
+        {view === 'messages' ? (
+          <div className="dashboard-messages-wrap">
+            <MessagesView
+              currentUser={user}
+              feed={feed}
+              onClose={() => setView('feed')}
+            />
+          </div>
+        ) : (
+          <div className="dashboard-grid">
+            <section className="feed-column">
+              <div className="space-header">
+                <div className="space-header-copy">
+                  <span className="space-eyebrow">
+                    <Sparkles size={14} />
+                    Tvůj prostor
+                  </span>
+  
+                  <h1>
+                    Vítej zpět, <span>{firstName}.</span>
+                  </h1>
+  
+                  <p>
+                    Pokračuj tam, kde jsi skončil. Tvoje práce, lidé a nové příležitosti jsou tady.
+                  </p>
+  
+                  <div className="space-pulse" aria-label="Přehled tvého prostoru">
+                    <span><strong>{userProjects}</strong> projektů</span>
+                    <i />
+                    <span><strong>{proofProjects.length}</strong> ověřené</span>
+                    <i />
+                    <span><strong>{visibleFeed.length}</strong> nové v prostoru</span>
+                  </div>
                 </div>
+  
               </div>
-
-            </div>
-
-            <Composer onCreate={onCreate} user={user} />
-
-            <div className="feed-filters" role="tablist" aria-label="Filtr feedu">
-              {([
-                ['all', 'Pro vás'],
-                ['post', 'Příspěvky'],
-                ['project', 'Projekty'],
-                ['service', 'Služby'],
-                ['job', 'Příležitosti']
-              ] as const).map(([value, label]) => (
-                <button
-                  className={filter === value ? 'active' : ''}
-                  key={value}
-                  onClick={() => setFilter(value)}
-                  type="button"
-                >
-                  {label}
-                </button>
-              ))}
-            </div>
-
-            <div className="activity-label">
-              <span />
-              <strong>Aktivita komunity</strong>
-              <small>{visibleFeed.length} položek</small>
-            </div>
-
-            <div className="feed-list">
-              {visibleFeed.map((item) => (
-                <FeedCard item={item} key={item.id} onLike={onLike} />
-              ))}
-              {visibleFeed.length === 0 && (
-                <div className="empty-state">
-                  <Search size={28} />
-                  <strong>Nic jsme nenašli</strong>
-                  <span>Zkuste jiný výraz nebo jiný filtr.</span>
-                </div>
-              )}
-            </div>
-          </section>
-
-          <aside className="right-column">
-            <section className="profile-card">
-              <div className="profile-topline">
-                <span className="avatar avatar-xl">{user.name.slice(0, 1).toUpperCase()}</span>
-                <span className="status-dot">Online</span>
+  
+              <Composer onCreate={onCreate} user={user} />
+  
+              <div className="feed-filters" role="tablist" aria-label="Filtr feedu">
+                {([
+                  ['all', 'Pro vás'],
+                  ['post', 'Příspěvky'],
+                  ['project', 'Projekty'],
+                  ['service', 'Služby'],
+                  ['job', 'Příležitosti']
+                ] as const).map(([value, label]) => (
+                  <button
+                    className={filter === value ? 'active' : ''}
+                    key={value}
+                    onClick={() => setFilter(value)}
+                    type="button"
+                  >
+                    {label}
+                  </button>
+                ))}
               </div>
-              <h2>{user.name}</h2>
-              <span>@{user.handle}</span>
-              <p>{user.headline}</p>
-              <small>{user.location}</small>
-              <div className="profile-stats">
-                <div><strong>24</strong><span>Kontaktů</span></div>
-                <div><strong>{userProjects}</strong><span>Projektů</span></div>
-                <div><strong>{proofProjects.length}</strong><span>Ověřených</span></div>
+  
+              <div className="activity-label">
+                <span />
+                <strong>Aktivita komunity</strong>
+                <small>{visibleFeed.length} položek</small>
               </div>
-            </section>
-
-            <section className="side-card">
-              <div className="card-title-row">
-                <h3><TrendingUp size={19} /> Trendy na Goodfeel</h3>
-                <button type="button">Vše</button>
-              </div>
-              <ol className="trend-list">
-                <li><span>01</span><div><strong>AI pro malé týmy</strong><small>2.4k příspěvků</small></div></li>
-                <li><span>02</span><div><strong>Building in public</strong><small>1.8k příspěvků</small></div></li>
-                <li><span>03</span><div><strong>Freelance pricing</strong><small>1.2k příspěvků</small></div></li>
-                <li><span>04</span><div><strong>Produktový design</strong><small>980 příspěvků</small></div></li>
-              </ol>
-            </section>
-
-            <section className="side-card">
-              <div className="card-title-row">
-                <h3><ShieldCheck size={19} /> Proof of Work</h3>
-                <button type="button">Vše</button>
-              </div>
-              <div className="proof-list">
-                {proofProjects.length > 0 ? (
-                  proofProjects.map((item) => (
-                    <article key={item.id}>
-                      <span className="proof-icon"><ShieldCheck size={18} /></span>
-                      <div>
-                        <strong>{item.title}</strong>
-                        <small>Potvrzeno klientem · {item.author.name}</small>
-                      </div>
-                    </article>
-                  ))
-                ) : (
-                  <p className="muted-copy">Zatím žádné ověřené projekty.</p>
+  
+              <div className="feed-list">
+                {visibleFeed.map((item) => (
+                  <FeedCard
+                  currentUserId={user.id}
+                  item={item}
+                  key={item.id}
+                  onDelete={onDelete}
+                  onLike={onLike}
+                  onUpdate={onUpdate}
+                />
+                ))}
+                {visibleFeed.length === 0 && (
+                  <div className="empty-state">
+                    <Search size={28} />
+                    <strong>Nic jsme nenašli</strong>
+                    <span>Zkuste jiný výraz nebo jiný filtr.</span>
+                  </div>
                 )}
               </div>
             </section>
-          </aside>
-        </div>
+  
+            <aside className="right-column">
+              <section className="profile-card">
+                <div className="profile-topline">
+                  <span className="avatar avatar-xl">{user.name.slice(0, 1).toUpperCase()}</span>
+                  <span className="status-dot">Online</span>
+                </div>
+                <h2>{user.name}</h2>
+                <span>@{user.handle}</span>
+                <p>{user.headline}</p>
+                <small>{user.location}</small>
+                <div className="profile-stats">
+                  <div><strong>24</strong><span>Kontaktů</span></div>
+                  <div><strong>{userProjects}</strong><span>Projektů</span></div>
+                  <div><strong>{proofProjects.length}</strong><span>Ověřených</span></div>
+                </div>
+              </section>
+  
+              <section className="side-card">
+                <div className="card-title-row">
+                  <h3><TrendingUp size={19} /> Trendy na Goodfeel</h3>
+                  <button type="button">Vše</button>
+                </div>
+                <ol className="trend-list">
+                  <li><span>01</span><div><strong>AI pro malé týmy</strong><small>2.4k příspěvků</small></div></li>
+                  <li><span>02</span><div><strong>Building in public</strong><small>1.8k příspěvků</small></div></li>
+                  <li><span>03</span><div><strong>Freelance pricing</strong><small>1.2k příspěvků</small></div></li>
+                  <li><span>04</span><div><strong>Produktový design</strong><small>980 příspěvků</small></div></li>
+                </ol>
+              </section>
+  
+              <section className="side-card">
+                <div className="card-title-row">
+                  <h3><ShieldCheck size={19} /> Proof of Work</h3>
+                  <button type="button">Vše</button>
+                </div>
+                <div className="proof-list">
+                  {proofProjects.length > 0 ? (
+                    proofProjects.map((item) => (
+                      <article key={item.id}>
+                        <span className="proof-icon"><ShieldCheck size={18} /></span>
+                        <div>
+                          <strong>{item.title}</strong>
+                          <small>Potvrzeno klientem · {item.author.name}</small>
+                        </div>
+                      </article>
+                    ))
+                  ) : (
+                    <p className="muted-copy">Zatím žádné ověřené projekty.</p>
+                  )}
+                </div>
+              </section>
+            </aside>
+          </div>
+        )}
       </main>
     </div>
   );
