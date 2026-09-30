@@ -4,13 +4,13 @@
       <stop offset="0" stop-color="#171b2e"/>
       <stop offset="1" stop-color="#0e1220"/>
     </linearGradient>
-    <linearGradient id="main" x1="8" y1="5" x2="34" y2="33" gradientUnits="userSpaceOnUse">
+    <linearGradient id="main" x1="7" y1="4" x2="33" y2="34" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#bd75ff"/>
       <stop offset="0.38" stop-color="#8b54ff"/>
       <stop offset="0.72" stop-color="#6848ff"/>
       <stop offset="1" stop-color="#5542ff"/>
     </linearGradient>
-    <linearGradient id="flow" x1="10" y1="25" x2="30" y2="31" gradientUnits="userSpaceOnUse">
+    <linearGradient id="flow" x1="8" y1="24" x2="29" y2="32" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#67e4ff"/>
       <stop offset="0.46" stop-color="#55b7ff"/>
       <stop offset="1" stop-color="#6869ff"/>
@@ -20,20 +20,24 @@
   <rect width="244" height="38" rx="11" fill="url(#bg)"/>
   <rect x=".5" y=".5" width="243" height="37" rx="10.5" fill="none" stroke="#ffffff" stroke-opacity=".09"/>
 
-  <circle
-    cx="20"
-    cy="20"
-    r="8"
-    fill="none"
-    stroke="url(#main)"
-    stroke-width="4.2"
-    stroke-linecap="round"
-    stroke-dasharray="40.5 9.8"
-    transform="rotate(-26 20 20)"
-  />
-  <path d="M15.1 24.2C17.3 26.4 20.5 27.4 23.7 26.6C25.1 26.1 26.4 25.3 27.4 24.2" fill="none" stroke="url(#flow)" stroke-width="1.8" stroke-linecap="round"/>
-  <path d="M21.8 19.4H27.2" fill="none" stroke="url(#main)" stroke-width="2.7" stroke-linecap="round"/>
-  <circle cx="28.2" cy="11.2" r="1.8" fill="url(#main)"/>
+  <g transform="translate(6 3) scale(.5)">
+    <path
+      d="M45.5 17.2C40.8 12 34.5 9.8 27.7 10.5C17.3 11.6 9.5 20.2 9.5 31.2C9.5 43.7 18.7 53.3 30.8 53.3C42.6 53.3 51.2 45.6 51.2 35.9V31.4H37.8"
+      fill="none"
+      stroke="url(#main)"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="10.6"
+    />
+    <path
+      d="M14.2 41.5C18.4 48.5 25.3 52.3 32.9 52.4C37.3 52.5 41.5 51.3 45 49.2"
+      fill="none"
+      stroke="url(#flow)"
+      stroke-linecap="round"
+      stroke-width="4.2"
+    />
+    <circle cx="50.7" cy="11.8" r="4.15" fill="url(#main)"/>
+  </g>
 
   <text x="41" y="24" fill="#fbfaff" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="800">Good</text>
   <text x="76" y="24" fill="#9b6cff" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="800">feel</text>
