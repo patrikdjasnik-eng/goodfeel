@@ -1415,16 +1415,42 @@ textarea::-moz-selection {
   overflow: visible;
   transform-origin: center;
   filter:
-    drop-shadow(0 7px 14px rgba(105, 77, 227, 0.2))
-    drop-shadow(0 0 8px rgba(91, 190, 255, 0.065));
+    drop-shadow(0 8px 16px rgba(105, 77, 227, 0.22))
+    drop-shadow(0 0 10px rgba(91, 190, 255, 0.08));
 }
 
+.workmoji-aura,
 .workmoji-shell,
-.workmoji-glyph {
+.workmoji-glyph,
+.workmoji-glint,
+.workmoji-core-dot {
   transform-origin: 32px 32px;
   transition:
-    transform 150ms ease,
-    filter 150ms ease;
+    opacity 160ms ease,
+    filter 160ms ease,
+    transform 160ms ease;
+}
+
+.workmoji-aura {
+  opacity: 0.82;
+}
+
+.workmoji-shell {
+  filter: saturate(1.04);
+}
+
+.workmoji-glyph {
+  filter:
+    drop-shadow(0 1px 3px rgba(8, 10, 22, 0.7))
+    drop-shadow(0 0 5px rgba(113, 116, 255, 0.11));
+}
+
+.workmoji-glint {
+  opacity: 0.78;
+}
+
+.workmoji-core-dot {
+  transform-origin: 47.5px 47px;
 }
 
 .workmoji-anchor {
@@ -1458,7 +1484,15 @@ textarea::-moz-selection {
 }
 
 .workmoji-trigger:hover .workmoji-mark {
-  transform: rotate(-4deg) scale(1.06);
+  transform: rotate(-3deg) scale(1.055);
+  filter:
+    drop-shadow(0 9px 18px rgba(105, 77, 227, 0.26))
+    drop-shadow(0 0 11px rgba(91, 190, 255, 0.11));
+}
+
+.workmoji-trigger:hover .workmoji-aura {
+  transform: rotate(8deg);
+  opacity: 1;
 }
 
 .workmoji-picker {
@@ -1552,11 +1586,17 @@ textarea::-moz-selection {
 @keyframes workmojiFloat {
   0%,
   100% {
-    transform: translateY(0) rotate(-1deg);
+    transform: translateY(0) rotate(-0.7deg);
+    filter:
+      drop-shadow(0 8px 16px rgba(105, 77, 227, 0.22))
+      drop-shadow(0 0 9px rgba(91, 190, 255, 0.08));
   }
 
   50% {
-    transform: translateY(-3px) rotate(1deg);
+    transform: translateY(-3px) rotate(0.7deg);
+    filter:
+      drop-shadow(0 11px 20px rgba(105, 77, 227, 0.3))
+      drop-shadow(0 0 13px rgba(91, 190, 255, 0.13));
   }
 }
 
@@ -1657,16 +1697,38 @@ textarea::-moz-selection {
     rgba(126, 91, 255, 0.045);
 }
 
+.workmoji-option:hover .workmoji-aura,
+.workmoji-option:focus-visible .workmoji-aura,
+.workmoji-option.previewed .workmoji-aura {
+  opacity: 1;
+  transform: rotate(7deg) scale(1.025);
+}
+
 .workmoji-option:hover .workmoji-shell,
 .workmoji-option:focus-visible .workmoji-shell,
 .workmoji-option.previewed .workmoji-shell {
-  transform: scale(1.03);
+  transform: scale(1.025);
+  filter: saturate(1.12) brightness(1.04);
 }
 
 .workmoji-option:hover .workmoji-glyph,
 .workmoji-option:focus-visible .workmoji-glyph,
 .workmoji-option.previewed .workmoji-glyph {
-  transform: translate(7.7px, 7.7px) scale(.79) rotate(-1deg);
+  filter:
+    drop-shadow(0 2px 4px rgba(6, 8, 20, 0.72))
+    drop-shadow(0 0 8px rgba(116, 128, 255, 0.2));
+}
+
+.workmoji-option:hover .workmoji-glint,
+.workmoji-option:focus-visible .workmoji-glint,
+.workmoji-option.previewed .workmoji-glint {
+  opacity: 1;
+}
+
+.workmoji-option:hover .workmoji-core-dot,
+.workmoji-option:focus-visible .workmoji-core-dot,
+.workmoji-option.previewed .workmoji-core-dot {
+  transform: scale(1.65);
 }
 
 .workmoji-option span {
