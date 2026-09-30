@@ -44,6 +44,7 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
   const [workmojiOpen, setWorkmojiOpen] = useState(false);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const workmojiAnchorRef = useRef<HTMLDivElement>(null);
+  const selectionRef = useRef({ start: 0, end: 0 });
 
   const placeholder = useMemo(() => {
     if (kind === 'project') return 'Co jste postavili, dokončili nebo právě stavíte?';
@@ -74,11 +75,21 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
     };
   }, [workmojiOpen]);
 
+  const rememberSelection = useCallback(() => {
+    const textarea = textareaRef.current;
+
+    if (!textarea) return;
+
+    selectionRef.current = {
+      start: textarea.selectionStart,
+      end: textarea.selectionEnd
+    };
+  }, []);
+
   const insertWorkmoji = useCallback(
     (workmoji: WorkmojiDefinition) => {
       const textarea = textareaRef.current;
-      const start = textarea?.selectionStart ?? body.length;
-      const end = textarea?.selectionEnd ?? body.length;
+      const { start, end } = selectionRef.current;
       const needsLeadingSpace = start > 0 && !/\s/.test(body[start - 1] ?? '');
       const needsTrailingSpace = end < body.length && !/\s/.test(body[end] ?? '');
       const insertion = `${needsLeadingSpace ? ' ' : ''}${workmoji.token}${needsTrailingSpace ? ' ' : ' '}`;
@@ -92,6 +103,11 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
       requestAnimationFrame(() => {
         const nextTextarea = textareaRef.current;
         const cursorPosition = start + insertion.length;
+
+        selectionRef.current = {
+          start: cursorPosition,
+          end: cursorPosition
+        };
 
         nextTextarea?.focus();
         nextTextarea?.setSelectionRange(cursorPosition, cursorPosition);
@@ -211,6 +227,9 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
       <textarea
         maxLength={1200}
         onChange={(event) => setBody(event.target.value)}
+        onClick={rememberSelection}
+        onKeyUp={rememberSelection}
+        onSelect={rememberSelection}
         placeholder={placeholder}
         ref={textareaRef}
         required
