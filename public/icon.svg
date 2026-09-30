@@ -1,29 +1,44 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <defs>
-    <linearGradient id="g" x1="24" y1="20" x2="110" y2="114" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#743dff"/>
-      <stop offset="0.52" stop-color="#6335fa"/>
-      <stop offset="1" stop-color="#4b2bdc"/>
+    <linearGradient id="main" x1="22" x2="110" y1="16" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#b06cff"/>
+      <stop offset="0.48" stop-color="#7748ff"/>
+      <stop offset="1" stop-color="#4e42ff"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="24" x2="90" y1="88" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#5de8ff"/>
+      <stop offset="0.55" stop-color="#58a8ff"/>
+      <stop offset="1" stop-color="#7267ff"/>
     </linearGradient>
   </defs>
 
   <circle
-    cx="59"
-    cy="70"
-    r="37"
+    cx="60"
+    cy="66"
+    r="40"
     fill="none"
-    stroke="url(#g)"
-    stroke-width="23"
+    stroke="url(#main)"
+    stroke-width="21"
     stroke-linecap="round"
-    stroke-dasharray="197 36"
+    stroke-dasharray="208 44"
+    transform="rotate(-27 60 66)"
   />
 
-  <ellipse
-    cx="102"
-    cy="25"
-    rx="12"
-    ry="9.5"
-    fill="url(#g)"
-    transform="rotate(-37 102 25)"
+  <path
+    d="M36 87C47 98 62 102.6 77.2 97.2C84.4 94.6 90.8 90.2 95.6 84.4"
+    fill="none"
+    stroke="url(#flow)"
+    stroke-width="8.4"
+    stroke-linecap="round"
   />
+
+  <path
+    d="M69.6 63.4H97.4"
+    fill="none"
+    stroke="url(#main)"
+    stroke-width="13"
+    stroke-linecap="round"
+  />
+
+  <circle cx="101.6" cy="24.4" r="9" fill="url(#main)"/>
 </svg>
