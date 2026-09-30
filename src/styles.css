@@ -358,40 +358,44 @@ textarea::-moz-selection {
   position: absolute;
   top: 43%;
   left: 58%;
-  width: min(42vw, 650px);
-  aspect-ratio: 1.12;
+  width: min(42vw, 620px);
+  aspect-ratio: 1;
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
 
 .auth-orbit {
   position: absolute;
+  top: 50%;
+  left: 50%;
+  aspect-ratio: 1;
   border: 1px solid rgba(133, 103, 255, 0.13);
   border-radius: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .auth-orbit-one {
-  inset: 8% 15% 10% 8%;
+  width: 92%;
 }
 
 .auth-orbit-two {
-  inset: 19% 25% 21% 19%;
+  width: 68%;
   border-color: rgba(93, 169, 255, 0.1);
 }
 
 .auth-orbit-three {
-  inset: 31% 36% 33% 31%;
+  width: 44%;
   border-color: rgba(255, 255, 255, 0.055);
 }
 
 .auth-visual-logo {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50.4%;
+  left: 49%;
   display: grid;
-  width: 31%;
-  min-width: 120px;
-  max-width: 185px;
+  width: 30%;
+  min-width: 118px;
+  max-width: 180px;
   aspect-ratio: 1;
   place-items: center;
   transform: translate(-50%, -50%);
@@ -412,28 +416,31 @@ textarea::-moz-selection {
 }
 
 .auth-visual-dot-one {
-  top: 16%;
-  right: 17%;
+  top: 18.2%;
+  left: 80.8%;
   width: 18px;
   height: 18px;
+  transform: translate(-50%, -50%);
   background: #9d6cff;
   color: rgba(157, 108, 255, 0.2);
 }
 
 .auth-visual-dot-two {
-  right: 10%;
-  bottom: 23%;
+  top: 72.8%;
+  left: 87.2%;
   width: 10px;
   height: 10px;
+  transform: translate(-50%, -50%);
   background: #5dbaff;
   color: rgba(93, 186, 255, 0.2);
 }
 
 .auth-visual-dot-three {
-  bottom: 12%;
-  left: 22%;
+  top: 84%;
+  left: 24%;
   width: 13px;
   height: 13px;
+  transform: translate(-50%, -50%);
   background: #7656f6;
   color: rgba(118, 86, 246, 0.18);
 }
