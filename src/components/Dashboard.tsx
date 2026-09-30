@@ -77,7 +77,7 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
     [feed, user.id]
   );
 
-  const firstName = useMemo(() => user.name.trim().split(/s+/)[0] || user.name, [user.name]);
+  const firstName = useMemo(() => user.name.trim().split(/\s+/)[0] || user.name, [user.name]);
   const closeMobileMenu = useCallback(() => setMobileMenuOpen(false), []);
 
   const renderNavigation = useCallback(
