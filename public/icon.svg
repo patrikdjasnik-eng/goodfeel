@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <defs>
-    <linearGradient id="g" x1="30" y1="26" x2="106" y2="114" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7a43ff"/>
-      <stop offset="0.52" stop-color="#6436fa"/>
+    <linearGradient id="g" x1="24" y1="20" x2="110" y2="114" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#743dff"/>
+      <stop offset="0.52" stop-color="#6335fa"/>
       <stop offset="1" stop-color="#4b2bdc"/>
     </linearGradient>
   </defs>
@@ -15,16 +15,15 @@
     stroke="url(#g)"
     stroke-width="23"
     stroke-linecap="round"
-    stroke-dasharray="172 62"
-    transform="rotate(-41 59 70)"
+    stroke-dasharray="197 36"
   />
 
   <ellipse
-    cx="97"
-    cy="31"
-    rx="14"
-    ry="10.8"
+    cx="102"
+    cy="25"
+    rx="12"
+    ry="9.5"
     fill="url(#g)"
-    transform="rotate(-37 97 31)"
+    transform="rotate(-37 102 25)"
   />
 </svg>
