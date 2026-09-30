@@ -82,8 +82,20 @@ textarea {
 }
 
 ::selection {
-  background: rgba(129, 92, 255, 0.4);
-  color: #fff;
+  background: rgba(72, 132, 255, 0.42);
+  color: #eaf4ff;
+}
+
+input::selection,
+textarea::selection {
+  background: rgba(72, 132, 255, 0.48);
+  color: #eaf4ff;
+}
+
+input::-moz-selection,
+textarea::-moz-selection {
+  background: rgba(72, 132, 255, 0.48);
+  color: #eaf4ff;
 }
 
 ::-webkit-scrollbar {
@@ -171,7 +183,9 @@ textarea {
   height: 48px;
   flex: 0 0 48px;
   overflow: visible;
-  filter: drop-shadow(0 8px 18px rgba(91, 54, 205, 0.18));
+  filter:
+    drop-shadow(0 8px 18px rgba(91, 54, 205, 0.22))
+    drop-shadow(0 0 10px rgba(93, 232, 255, 0.06));
 }
 
 .brand-copy {
