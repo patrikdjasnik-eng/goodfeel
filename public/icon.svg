@@ -1,16 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128">
   <defs>
-    <linearGradient id="main" x1="22" x2="110" y1="16" y2="116" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#b06cff"/>
-      <stop offset="0.48" stop-color="#7748ff"/>
-      <stop offset="1" stop-color="#4e42ff"/>
+    <linearGradient id="panel" x1="18" y1="10" x2="110" y2="118" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#17132d"/>
+      <stop offset="1" stop-color="#0b0d19"/>
     </linearGradient>
-    <linearGradient id="flow" x1="24" x2="90" y1="88" y2="110" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#5de8ff"/>
-      <stop offset="0.55" stop-color="#58a8ff"/>
-      <stop offset="1" stop-color="#7267ff"/>
+    <linearGradient id="main" x1="22" y1="16" x2="110" y2="116" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#bd75ff"/>
+      <stop offset="0.38" stop-color="#8b54ff"/>
+      <stop offset="0.72" stop-color="#6848ff"/>
+      <stop offset="1" stop-color="#5542ff"/>
+    </linearGradient>
+    <linearGradient id="flow" x1="25" y1="87" x2="89" y2="108" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#67e4ff"/>
+      <stop offset="0.46" stop-color="#55b7ff"/>
+      <stop offset="1" stop-color="#6869ff"/>
     </linearGradient>
   </defs>
+
+  <rect x="6" y="6" width="116" height="116" rx="28" fill="url(#panel)"/>
+  <rect x="6.5" y="6.5" width="115" height="115" rx="27.5" fill="none" stroke="#8f5cff" stroke-opacity=".28"/>
 
   <circle
     cx="60"
@@ -20,25 +28,18 @@
     stroke="url(#main)"
     stroke-width="21"
     stroke-linecap="round"
-    stroke-dasharray="208 44"
-    transform="rotate(-27 60 66)"
+    stroke-dasharray="202 50"
+    transform="rotate(-26 60 66)"
   />
 
   <path
-    d="M36 87C47 98 62 102.6 77.2 97.2C84.4 94.6 90.8 90.2 95.6 84.4"
+    d="M35.4 85.6C46.6 97 62.6 102 78.4 97.8C85.6 95.4 92 91.4 97.2 85.8"
     fill="none"
     stroke="url(#flow)"
-    stroke-width="8.4"
+    stroke-width="8.8"
     stroke-linecap="round"
   />
 
-  <path
-    d="M69.6 63.4H97.4"
-    fill="none"
-    stroke="url(#main)"
-    stroke-width="13"
-    stroke-linecap="round"
-  />
-
-  <circle cx="101.6" cy="24.4" r="9" fill="url(#main)"/>
+  <path d="M69 63.2H96.2" fill="none" stroke="url(#main)" stroke-width="13.4" stroke-linecap="round"/>
+  <circle cx="101.4" cy="24.4" r="8.6" fill="url(#main)"/>
 </svg>
