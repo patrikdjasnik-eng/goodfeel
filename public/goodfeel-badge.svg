@@ -4,9 +4,9 @@
       <stop offset="0" stop-color="#171b2e"/>
       <stop offset="1" stop-color="#0e1220"/>
     </linearGradient>
-    <linearGradient id="accent" x1="11" y1="7" x2="31" y2="31" gradientUnits="userSpaceOnUse">
-      <stop offset="0" stop-color="#7a43ff"/>
-      <stop offset="0.52" stop-color="#6436fa"/>
+    <linearGradient id="accent" x1="10" y1="7" x2="31" y2="31" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#743dff"/>
+      <stop offset="0.52" stop-color="#6335fa"/>
       <stop offset="1" stop-color="#4b2bdc"/>
     </linearGradient>
   </defs>
@@ -22,16 +22,15 @@
     stroke="url(#accent)"
     stroke-width="4.7"
     stroke-linecap="round"
-    stroke-dasharray="35 12.5"
-    transform="rotate(-41 19 20)"
+    stroke-dasharray="40 7.5"
   />
   <ellipse
-    cx="27"
-    cy="11.5"
-    rx="3"
-    ry="2.3"
+    cx="27.7"
+    cy="10.9"
+    rx="2.45"
+    ry="1.95"
     fill="url(#accent)"
-    transform="rotate(-37 27 11.5)"
+    transform="rotate(-37 27.7 10.9)"
   />
 
   <text x="39" y="22.5" fill="#f6f4ff" font-family="Segoe UI,Arial,sans-serif" font-size="14" font-weight="700">Goodfeel</text>
