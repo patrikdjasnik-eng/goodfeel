@@ -9,6 +9,7 @@ import {
   updateFeedItem
 } from './lib/storage';
 import { registerServiceWorker } from './lib/pwa';
+import { BrandMark } from './components/Brand';
 
 const Dashboard = lazy(() =>
   import('./components/Dashboard').then((module) => ({ default: module.Dashboard }))
@@ -79,9 +80,7 @@ function App() {
   if (status === 'loading') {
     return (
       <main className="boot-screen" aria-live="polite">
-        <span className="boot-mark" aria-hidden="true">
-          <span />
-        </span>
+        <BrandMark className="boot-mark" />
         <strong>Goodfeel</strong>
         <p>Načítám lokální pracovní prostor…</p>
       </main>
@@ -91,9 +90,7 @@ function App() {
   if (status === 'error') {
     return (
       <main className="boot-screen boot-error" role="alert">
-        <span className="boot-mark" aria-hidden="true">
-          <span />
-        </span>
+        <BrandMark className="boot-mark" />
         <strong>Goodfeel se nespustil</strong>
         <p>{error}</p>
         <button className="primary-button" onClick={() => void bootstrap()} type="button">
