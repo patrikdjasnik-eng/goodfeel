@@ -12,6 +12,7 @@ import {
   Wrench
 } from 'lucide-react';
 import type { FeedItem } from '../types';
+import { WorkmojiText } from './WorkmojiText';
 
 interface FeedCardProps {
   item: FeedItem;
@@ -78,7 +79,7 @@ export const FeedCard = memo(({ item, onLike }: FeedCardProps) => {
 
       <div className="feed-content">
         {item.title && <h3>{item.title}</h3>}
-        <p>{item.body}</p>
+        <p><WorkmojiText text={item.body} /></p>
 
         {item.tags.length > 0 && (
           <div className="tag-row">
