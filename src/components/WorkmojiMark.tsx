@@ -100,62 +100,96 @@ const renderShell = (
   shellEdge: string,
   accent: string
 ): ReactNode => {
+  const common = (
+    <>
+      <circle
+        cx="32"
+        cy="32"
+        r="27"
+        fill="none"
+        stroke={accent}
+        strokeWidth="1"
+        strokeDasharray="2 6"
+        opacity=".18"
+      />
+      <circle cx="32" cy="32" r="22.5" fill="none" stroke="rgba(255,255,255,.045)" strokeWidth="1" />
+    </>
+  );
+
   switch (category) {
     case 'goodfeel':
       return (
         <>
-          <circle cx="32" cy="32" r="27" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <path d="M15 21c8-12 26-15 36-5" fill="none" stroke="rgba(255,255,255,.13)" strokeWidth="2.2" strokeLinecap="round" />
+          <path
+            d="M32 5C46 5 57 16 57 30c0 15-10 26-25 29C17 56 7 45 7 31 7 16 18 5 32 5Z"
+            fill={shell}
+            stroke={shellEdge}
+            strokeWidth="1.5"
+          />
+          <path d="M15 20c8-10 26-13 36-4" fill="none" stroke="rgba(255,255,255,.16)" strokeWidth="2" strokeLinecap="round" />
+          {common}
         </>
       );
     case 'code':
       return (
         <>
-          <rect x="6" y="6" width="52" height="52" rx="17" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <path d="M17 15h30" stroke="rgba(255,255,255,.09)" strokeWidth="2" strokeLinecap="round" />
+          <rect x="6" y="6" width="52" height="52" rx="16" fill={shell} stroke={shellEdge} strokeWidth="1.5" />
+          <path d="M15 16h25" stroke="rgba(255,255,255,.12)" strokeWidth="2" strokeLinecap="round" />
+          <circle cx="47" cy="16" r="2.4" fill={accent} opacity=".68" />
+          {common}
         </>
       );
     case 'design':
       return (
         <>
-          <rect x="7" y="7" width="50" height="50" rx="18" fill={shell} stroke={shellEdge} strokeWidth="1.4" transform="rotate(-7 32 32)" />
-          <circle cx="47" cy="17" r="3" fill={accent} opacity=".7" />
+          <rect x="7" y="7" width="50" height="50" rx="18" fill={shell} stroke={shellEdge} strokeWidth="1.5" transform="rotate(-6 32 32)" />
+          <path d="M17 49c8 5 22 5 31-2" fill="none" stroke={accent} strokeWidth="1.2" opacity=".2" strokeLinecap="round" />
+          <circle cx="47" cy="17" r="2.7" fill={accent} opacity=".72" />
+          {common}
         </>
       );
     case 'ai':
       return (
         <>
-          <circle cx="32" cy="32" r="26" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <ellipse cx="32" cy="32" rx="25" ry="12" fill="none" stroke={accent} strokeWidth="1.2" opacity=".22" transform="rotate(-18 32 32)" />
+          <circle cx="32" cy="32" r="26" fill={shell} stroke={shellEdge} strokeWidth="1.5" />
+          <ellipse cx="32" cy="32" rx="25" ry="11" fill="none" stroke={accent} strokeWidth="1.2" opacity=".24" transform="rotate(-18 32 32)" />
+          <ellipse cx="32" cy="32" rx="19" ry="25" fill="none" stroke={accent} strokeWidth=".9" opacity=".1" transform="rotate(28 32 32)" />
+          {common}
         </>
       );
     case 'cyber':
       return (
         <>
-          <path d="M32 5 55 14v17c0 14-9 23-23 29C18 54 9 45 9 31V14L32 5Z" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <path d="M18 18 32 12l14 6" fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M32 5 55 14v17c0 14-9 23-23 29C18 54 9 45 9 31V14L32 5Z" fill={shell} stroke={shellEdge} strokeWidth="1.5" />
+          <path d="M18 18 32 12l14 6" fill="none" stroke="rgba(255,255,255,.1)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M18 46 32 53l14-7" fill="none" stroke={accent} strokeWidth="1" opacity=".16" strokeLinecap="round" />
+          {common}
         </>
       );
     case 'freelance':
       return (
         <>
-          <path d="M12 17c8-9 32-11 41 1 8 11 3 29-8 36-10 7-29 5-36-6-7-10-5-22 3-31Z" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <circle cx="48" cy="18" r="3" fill={accent} opacity=".55" />
+          <path d="M12 17c8-9 32-11 41 1 8 11 3 29-8 36-10 7-29 5-36-6-7-10-5-22 3-31Z" fill={shell} stroke={shellEdge} strokeWidth="1.5" />
+          <path d="M16 43c10 10 26 11 36 1" fill="none" stroke={accent} strokeWidth="1.1" opacity=".18" strokeLinecap="round" />
+          <circle cx="48" cy="18" r="2.7" fill={accent} opacity=".66" />
+          {common}
         </>
       );
     case 'operations':
       return (
         <>
-          <path d="m32 5 23 13v28L32 59 9 46V18L32 5Z" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <path d="M17 20 32 12l15 8" fill="none" stroke="rgba(255,255,255,.08)" strokeWidth="2" strokeLinecap="round" />
+          <path d="m32 5 23 13v28L32 59 9 46V18L32 5Z" fill={shell} stroke={shellEdge} strokeWidth="1.5" />
+          <path d="M17 20 32 12l15 8" fill="none" stroke="rgba(255,255,255,.1)" strokeWidth="2" strokeLinecap="round" />
+          <path d="M14 40 32 51l18-10" fill="none" stroke={accent} strokeWidth="1.1" opacity=".18" />
+          {common}
         </>
       );
     case 'community':
       return (
         <>
-          <circle cx="25" cy="31" r="22" fill={shell} stroke={shellEdge} strokeWidth="1.4" />
-          <circle cx="42" cy="33" r="17" fill={shell} stroke={shellEdge} strokeWidth="1.2" opacity=".92" />
-          <circle cx="47" cy="18" r="3" fill={accent} opacity=".65" />
+          <path d="M10 31c0-13 9-22 21-22 8 0 14 3 18 9 8 2 13 9 13 18 0 11-8 19-20 19-5 0-9-1-13-4-3 2-7 3-11 3-11 0-18-9-18-19 0-7 4-13 10-16Z" fill={shell} stroke={shellEdge} strokeWidth="1.5" />
+          <circle cx="47" cy="18" r="2.7" fill={accent} opacity=".68" />
+          {common}
         </>
       );
   }
@@ -180,17 +214,21 @@ const renderGlyph = (
     case 'gf-proof':
       return (
         <>
-          <path d="M32 8 49 15v13c0 12-7 21-17 28C22 49 15 40 15 28V15L32 8Z" fill="none" stroke={main} strokeWidth="6" strokeLinejoin="round" />
-          <path d="m23 31 6 6 13-14" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="m32 8 16 8-2 20-14 18-14-18-2-20 16-8Z" fill="none" stroke={main} strokeWidth="5.5" strokeLinejoin="round" />
+          <path d="m32 16 9 5-1 12-8 10-8-10-1-12 9-5Z" fill="none" stroke={accent} strokeWidth="3.2" strokeLinejoin="round" />
+          <circle cx="32" cy="29" r="4.5" fill={soft} />
+          <path d="m29.5 29 2 2 4-5" fill="none" stroke="#0b1020" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
         </>
       );
 
     case 'gf-flow':
       return (
         <>
-          <path d="M10 20c12 0 12 10 24 10s12-10 20-10" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <path d="M10 32c12 0 12 10 24 10s12-10 20-10" fill="none" stroke={accent} strokeWidth="6" strokeLinecap="round" />
-          <path d="M10 44c12 0 12 8 24 8" fill="none" stroke={soft} strokeWidth="5" strokeLinecap="round" />
+          <path d="M8 21c9-5 14 8 24 5 8-2 11-10 24-7" fill="none" stroke={main} strokeWidth="5.5" strokeLinecap="round" />
+          <path d="M8 33c10-4 15 8 25 5 8-2 11-9 23-6" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" />
+          <path d="M10 45c9-3 14 6 23 4 7-2 10-7 19-6" fill="none" stroke={soft} strokeWidth="3.8" strokeLinecap="round" opacity=".9" />
+          <circle cx="20" cy="26" r="2.4" fill={soft} />
+          <circle cx="44" cy="34" r="2.2" fill={main} />
         </>
       );
 
@@ -236,9 +274,10 @@ const renderGlyph = (
     case 'gf-greenbuild':
       return (
         <>
-          <rect x="10" y="13" width="44" height="38" rx="9" fill="none" stroke={main} strokeWidth="5" />
-          <path d="m18 25 7 6-7 6M31 39h13" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="47" cy="20" r="3" fill={soft} />
+          <path d="M14 17h36l4 8-4 22H14l-4-22 4-8Z" fill="none" stroke={main} strokeWidth="4.8" strokeLinejoin="round" />
+          <path d="m21 30 6 5-6 5M32 40h11" fill="none" stroke={accent} strokeWidth="4.6" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M18 21h20" stroke={soft} strokeWidth="2.6" strokeLinecap="round" opacity=".85" />
+          <circle cx="45" cy="21" r="3" fill={soft} />
         </>
       );
 
@@ -256,40 +295,52 @@ const renderGlyph = (
     case 'gf-perfectcurve':
       return (
         <>
-          <path d="M10 44C18 12 42 12 54 30" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <path d="M10 44c18 8 34 4 44-14" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" />
-          <circle cx="10" cy="44" r="4" fill={soft} />
-          <circle cx="54" cy="30" r="4" fill={accent} />
+          <path d="M10 45C17 14 41 10 54 28" fill="none" stroke={main} strokeWidth="5.4" strokeLinecap="round" />
+          <path d="M10 45c17 6 34 3 44-17" fill="none" stroke={accent} strokeWidth="3.8" strokeLinecap="round" />
+          <path d="M10 45 18 19M54 28 46 12" fill="none" stroke={soft} strokeWidth="1.8" opacity=".58" strokeLinecap="round" />
+          <circle cx="10" cy="45" r="4.2" fill={soft} />
+          <circle cx="18" cy="19" r="2.8" fill={main} />
+          <circle cx="46" cy="12" r="2.8" fill={accent} />
+          <circle cx="54" cy="28" r="4.2" fill={accent} />
         </>
       );
 
     case 'gf-gridsoul':
       return (
         <>
-          {[14, 27, 40].flatMap((x) =>
-            [14, 27, 40].map((y) => (
-              <rect
-                key={`${x}-${y}`}
-                x={x}
-                y={y}
-                width="10"
-                height="10"
-                rx="3"
-                fill={x === 27 && y === 27 ? accent : main}
-                opacity={x === 27 && y === 27 ? 1 : 0.45}
-              />
-            ))
+          {[15, 27, 39].flatMap((x) =>
+            [15, 27, 39].map((y) => {
+              const center = x === 27 && y === 27;
+              const distance = Math.abs(x - 27) + Math.abs(y - 27);
+
+              return (
+                <rect
+                  key={`${x}-${y}`}
+                  x={x}
+                  y={y}
+                  width={center ? 12 : 9}
+                  height={center ? 12 : 9}
+                  rx={center ? 4 : 3}
+                  fill={center ? accent : main}
+                  opacity={center ? 1 : distance > 18 ? 0.34 : 0.58}
+                  transform={center ? 'translate(-1 -1) rotate(8 33 33)' : undefined}
+                />
+              );
+            })
           )}
-          <circle cx="50" cy="14" r="4" fill={soft} />
+          <circle cx="50" cy="14" r="3.6" fill={soft} />
+          <path d="M46 18 40 24" stroke={soft} strokeWidth="2" opacity=".55" strokeLinecap="round" />
         </>
       );
 
     case 'gf-thinkloop':
       return (
         <>
-          <path d="M48 20c-4-7-11-11-19-10-11 1-19 10-19 21s8 20 19 21c9 1 17-4 21-12" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <path d="M48 20h-9M50 40h-9" stroke={accent} strokeWidth="5" strokeLinecap="round" />
-          <circle cx="32" cy="31" r="5" fill={soft} />
+          <ellipse cx="32" cy="32" rx="22" ry="13" fill="none" stroke={main} strokeWidth="4.8" transform="rotate(-18 32 32)" />
+          <ellipse cx="32" cy="32" rx="18" ry="10" fill="none" stroke={accent} strokeWidth="3.6" transform="rotate(36 32 32)" opacity=".95" />
+          <path d="M19 45c5 6 15 9 24 4" fill="none" stroke={soft} strokeWidth="3" strokeLinecap="round" />
+          <circle cx="32" cy="32" r="5.5" fill={soft} />
+          <circle cx="47" cy="20" r="3" fill={accent} />
         </>
       );
 
@@ -429,6 +480,36 @@ const renderGlyph = (
 };
 
 
+const glyphTuning: Record<WorkmojiId, { x: number; y: number; scale: number; rotate?: number }> = {
+  'gf-spark': { x: 8.6, y: 8.6, scale: 0.73, rotate: -2 },
+  'gf-proof': { x: 8.2, y: 8.2, scale: 0.74 },
+  'gf-flow': { x: 7.2, y: 7.2, scale: 0.78 },
+  'gf-brainhit': { x: 8.1, y: 8.1, scale: 0.75 },
+  'gf-stackling': { x: 8.3, y: 8.3, scale: 0.74 },
+  'gf-bugbite': { x: 7.5, y: 7.5, scale: 0.77 },
+  'gf-mergey': { x: 8.1, y: 8.1, scale: 0.75 },
+  'gf-greenbuild': { x: 7.4, y: 7.4, scale: 0.77 },
+  'gf-pixelbloom': { x: 8.2, y: 8.2, scale: 0.75, rotate: -1 },
+  'gf-perfectcurve': { x: 7.2, y: 7.2, scale: 0.78 },
+  'gf-gridsoul': { x: 7.6, y: 7.6, scale: 0.77 },
+  'gf-thinkloop': { x: 7.6, y: 7.6, scale: 0.77 },
+  'gf-agentawake': { x: 7.5, y: 7.5, scale: 0.77 },
+  'gf-contextfull': { x: 7.7, y: 7.7, scale: 0.76 },
+  'gf-ghostwall': { x: 8.2, y: 8.2, scale: 0.75 },
+  'gf-zerotrace': { x: 7.8, y: 7.8, scale: 0.76 },
+  'gf-huntmark': { x: 7.4, y: 7.4, scale: 0.77 },
+  'gf-clientglow': { x: 7.8, y: 7.8, scale: 0.76 },
+  'gf-scopeclear': { x: 7.7, y: 7.7, scale: 0.76 },
+  'gf-delivered': { x: 7.7, y: 7.7, scale: 0.76 },
+  'gf-flowlock': { x: 7.2, y: 7.2, scale: 0.78 },
+  'gf-routepulse': { x: 7.3, y: 7.3, scale: 0.78 },
+  'gf-zerobacklog': { x: 7.7, y: 7.7, scale: 0.76 },
+  'gf-respectpulse': { x: 7.4, y: 7.4, scale: 0.77 },
+  'gf-goodvibe': { x: 7.4, y: 7.4, scale: 0.77 },
+  'gf-supportlink': { x: 7.3, y: 7.3, scale: 0.78 }
+};
+
+
 export const WorkmojiMark = memo(({
   id,
   size = 28,
@@ -445,6 +526,8 @@ export const WorkmojiMark = memo(({
   const category = workmoji?.category ?? 'goodfeel';
   const palette = categoryPalette[category];
   const label = title ?? workmoji?.label ?? 'Goodfeel Workmoji';
+  const tuning = glyphTuning[id];
+  const glyphTransform = `translate(${tuning.x} ${tuning.y}) scale(${tuning.scale}) rotate(${tuning.rotate ?? 0} 32 32)`;
 
   return (
     <svg
@@ -480,6 +563,12 @@ export const WorkmojiMark = memo(({
         </linearGradient>
       </defs>
 
+      <g className="workmoji-aura" aria-hidden="true">
+        <circle cx="32" cy="32" r="29.2" fill="none" stroke={`url(#${accentId})`} strokeWidth=".8" strokeDasharray="1 7" opacity=".22" />
+        <circle cx="16" cy="46" r="1.5" fill={`url(#${softId})`} opacity=".78" />
+        <circle cx="49" cy="14" r="1.2" fill={`url(#${accentId})`} opacity=".82" />
+      </g>
+
       <g className="workmoji-shell">
         {renderShell(
           category,
@@ -489,7 +578,7 @@ export const WorkmojiMark = memo(({
         )}
       </g>
 
-      <g className="workmoji-glyph" transform="translate(7.7 7.7) scale(.76)">
+      <g className="workmoji-glyph" transform={glyphTransform}>
         {renderGlyph(
           id,
           `url(#${mainId})`,
@@ -499,12 +588,14 @@ export const WorkmojiMark = memo(({
       </g>
 
       <path
+        className="workmoji-glint"
         d="M18 13c8-5 20-6 28-1"
         fill="none"
-        stroke="rgba(255,255,255,.12)"
+        stroke="rgba(255,255,255,.16)"
         strokeLinecap="round"
         strokeWidth="1.6"
       />
+      <circle className="workmoji-core-dot" cx="47.5" cy="47" r="1.35" fill={`url(#${softId})`} opacity=".72" />
     </svg>
   );
 });
