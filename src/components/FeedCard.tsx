@@ -18,6 +18,7 @@ import {
 } from 'lucide-react';
 import type { FeedItem } from '../types';
 import { WorkmojiText } from './WorkmojiText';
+import { AvatarToken } from './AvatarToken';
 
 interface FeedCardProps {
   item: FeedItem;
@@ -117,7 +118,7 @@ export const FeedCard = memo(({
   return (
     <article className="feed-card">
       <header className="feed-card-header">
-        <span className="avatar">{item.author.name.slice(0, 1).toUpperCase()}</span>
+        <AvatarToken name={item.author.name} size="md" />
         <div className="feed-author">
           <div>
             <strong>{item.author.name}</strong>
