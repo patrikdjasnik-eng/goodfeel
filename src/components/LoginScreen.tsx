@@ -1,12 +1,15 @@
 import { FormEvent, memo, useCallback, useState } from 'react';
 import {
+  ArrowRight,
   BadgeCheck,
   BarChart3,
   Briefcase,
+  CheckCircle2,
   Eye,
   EyeOff,
   LockKeyhole,
   Mail,
+  ShieldCheck,
   Users
 } from 'lucide-react';
 import type { UserProfile } from '../types';
@@ -28,6 +31,12 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
+  const switchMode = useCallback((nextMode: AuthMode) => {
+    setMode(nextMode);
+    setError('');
+    setShowPassword(false);
+  }, []);
+
   const submit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
       event.preventDefault();
@@ -42,7 +51,11 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
 
         onAuthenticated(user);
       } catch (caughtError) {
-        setError(caughtError instanceof Error ? caughtError.message : 'Přihlášení se nepodařilo.');
+        setError(
+          caughtError instanceof Error
+            ? caughtError.message
+            : 'Přihlášení se nepodařilo.'
+        );
       } finally {
         setBusy(false);
       }
@@ -55,6 +68,7 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
     setEmail('demo@goodfeel.local');
     setPassword('goodfeel');
     setError('');
+    setShowPassword(false);
   }, []);
 
   return (
@@ -73,6 +87,12 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
             Profily, projekty, nabídky práce a přirozené konverzace na jednom místě.
             Reputace vzniká z toho, co opravdu dokončíte.
           </p>
+
+          <div className="auth-proof-row" aria-label="Goodfeel developer preview">
+            <span><CheckCircle2 size={15} /> Proof of Work</span>
+            <span><CheckCircle2 size={15} /> Local-first MVP</span>
+            <span><CheckCircle2 size={15} /> PWA ready</span>
+          </div>
         </div>
 
         <div className="feature-list">
@@ -108,107 +128,130 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
       </section>
 
       <section className="auth-card glass-panel">
-        <div className="auth-tabs" role="tablist" aria-label="Přihlášení nebo registrace">
-          <button
-            className={mode === 'login' ? 'active' : ''}
-            onClick={() => setMode('login')}
-            type="button"
-          >
-            Přihlášení
-          </button>
-          <button
-            className={mode === 'register' ? 'active' : ''}
-            onClick={() => setMode('register')}
-            type="button"
-          >
-            Registrace
-          </button>
-        </div>
+        <div className="auth-card-inner">
+          <div className="auth-card-status">
+            <span><ShieldCheck size={15} /> Developer Preview</span>
+            <small>v0.1</small>
+          </div>
 
-        <div className="auth-heading">
-          <p className="eyebrow">Goodfeel MVP</p>
-          <h2>{mode === 'login' ? 'Vítejte zpět' : 'Vytvořte si profil'}</h2>
-          <p>
-            {mode === 'login'
-              ? 'Přihlaste se ke svému účtu.'
-              : 'Začněte publikovat práci, služby a projekty.'}
-          </p>
-        </div>
+          <div className="auth-tabs" role="tablist" aria-label="Přihlášení nebo registrace">
+            <button
+              aria-selected={mode === 'login'}
+              className={mode === 'login' ? 'active' : ''}
+              onClick={() => switchMode('login')}
+              role="tab"
+              type="button"
+            >
+              Přihlášení
+            </button>
+            <button
+              aria-selected={mode === 'register'}
+              className={mode === 'register' ? 'active' : ''}
+              onClick={() => switchMode('register')}
+              role="tab"
+              type="button"
+            >
+              Registrace
+            </button>
+          </div>
 
-        <form onSubmit={submit}>
-          {mode === 'register' && (
+          <div className="auth-heading">
+            <p className="eyebrow">Goodfeel</p>
+            <h2>{mode === 'login' ? 'Vítejte zpět' : 'Vytvořte si profil'}</h2>
+            <p>
+              {mode === 'login'
+                ? 'Pokračujte tam, kde jste skončili.'
+                : 'Začněte publikovat práci, služby a projekty.'}
+            </p>
+          </div>
+
+          <form className="auth-form" onSubmit={submit}>
+            {mode === 'register' && (
+              <label className="field-label">
+                <span className="field-label-text">Jméno</span>
+                <span className="input-wrap">
+                  <Users size={18} />
+                  <input
+                    autoComplete="name"
+                    onChange={(event) => setName(event.target.value)}
+                    placeholder="Vaše jméno"
+                    required
+                    value={name}
+                  />
+                </span>
+              </label>
+            )}
+
             <label className="field-label">
-              Jméno
+              <span className="field-label-text">E-mail</span>
               <span className="input-wrap">
-                <Users size={19} />
+                <Mail size={18} />
                 <input
-                  autoComplete="name"
-                  onChange={(event) => setName(event.target.value)}
-                  placeholder="Vaše jméno"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  onChange={(event) => setEmail(event.target.value)}
+                  placeholder="vy@example.com"
                   required
-                  value={name}
+                  spellCheck={false}
+                  type="email"
+                  value={email}
                 />
               </span>
             </label>
-          )}
 
-          <label className="field-label">
-            E-mail
-            <span className="input-wrap">
-              <Mail size={19} />
-              <input
-                autoComplete="email"
-                onChange={(event) => setEmail(event.target.value)}
-                placeholder="vy@example.com"
-                required
-                type="email"
-                value={email}
-              />
-            </span>
-          </label>
+            <label className="field-label">
+              <span className="field-label-text">Heslo</span>
+              <span className="input-wrap">
+                <LockKeyhole size={18} />
+                <input
+                  autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
+                  minLength={mode === 'register' ? 8 : undefined}
+                  onChange={(event) => setPassword(event.target.value)}
+                  placeholder={mode === 'register' ? 'Alespoň 8 znaků' : 'Vaše heslo'}
+                  required
+                  type={showPassword ? 'text' : 'password'}
+                  value={password}
+                />
+                <button
+                  aria-label={showPassword ? 'Skrýt heslo' : 'Zobrazit heslo'}
+                  className="password-toggle"
+                  onClick={() => setShowPassword((current) => !current)}
+                  type="button"
+                >
+                  {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </span>
+            </label>
 
-          <label className="field-label">
-            Heslo
-            <span className="input-wrap">
-              <LockKeyhole size={19} />
-              <input
-                autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
-                minLength={mode === 'register' ? 8 : undefined}
-                onChange={(event) => setPassword(event.target.value)}
-                placeholder={mode === 'register' ? 'Alespoň 8 znaků' : 'Vaše heslo'}
-                required
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-              />
-              <button
-                aria-label={showPassword ? 'Skrýt heslo' : 'Zobrazit heslo'}
-                className="icon-button"
-                onClick={() => setShowPassword((current) => !current)}
-                type="button"
-              >
-                {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </span>
-          </label>
+            {error && <p className="form-error" role="alert">{error}</p>}
 
-          {error && <p className="form-error">{error}</p>}
+            <button className="primary-button auth-submit" disabled={busy} type="submit">
+              <span>
+                {busy
+                  ? 'Pracuji…'
+                  : mode === 'login'
+                    ? 'Přihlásit se'
+                    : 'Vytvořit účet'}
+              </span>
+              {!busy && <ArrowRight size={18} />}
+            </button>
+          </form>
 
-          <button className="primary-button full-width" disabled={busy} type="submit">
-            {busy ? 'Pracuji…' : mode === 'login' ? 'Přihlásit se' : 'Vytvořit účet'}
-          </button>
-        </form>
+          <div className="demo-login">
+            <div>
+              <strong>Jen si Goodfeel prohlédnout?</strong>
+              <span>Použijte lokální demo účet bez registrace.</span>
+            </div>
+            <button onClick={fillDemo} type="button">
+              Vyplnit demo účet
+            </button>
+            <small>demo@goodfeel.local · goodfeel</small>
+          </div>
 
-        <div className="demo-login">
-          <span>Chcete se jen podívat?</span>
-          <button onClick={fillDemo} type="button">
-            Vyplnit demo účet
-          </button>
-          <small>demo@goodfeel.local · goodfeel</small>
+          <p className="auth-note">
+            Developer Preview ukládá účet pouze lokálně v tomto prohlížeči.
+          </p>
         </div>
-
-        <p className="auth-note">
-          MVP ukládá účet lokálně v prohlížeči. Produkční autentizace a serverová databáze přijdou v další fázi.
-        </p>
       </section>
     </main>
   );
