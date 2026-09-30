@@ -205,9 +205,10 @@ const renderGlyph = (
     case 'gf-spark':
       return (
         <>
-          <path d="M32 10l5.2 12.8L50 28l-12.8 5.2L32 46l-5.2-12.8L14 28l12.8-5.2L32 10Z" fill={main} />
-          <circle cx="49" cy="13" r="4" fill={accent} />
-          <circle cx="15" cy="49" r="3" fill={soft} />
+          <path d="M32 8 37 24l15 5-14 6-5 17-6-16-15-5 14-7 6-16Z" fill={main} />
+          <path d="m40 12 2.6 7.2L50 22l-7.4 2.8L40 32l-2.7-7.2L30 22l7.3-2.8L40 12Z" fill={accent} opacity=".82" />
+          <circle cx="50" cy="14" r="2.8" fill={soft} />
+          <circle cx="15" cy="47" r="2.2" fill={accent} />
         </>
       );
 
@@ -235,39 +236,45 @@ const renderGlyph = (
     case 'gf-brainhit':
       return (
         <>
-          <path d="M45 18a20 20 0 1 0 3 28" fill="none" stroke={main} strokeWidth="7" strokeLinecap="round" />
-          <path d="m35 16-8 16h8l-6 16 15-21h-9l7-11Z" fill={accent} />
+          <path d="M43 17c-5-6-15-8-23-3-9 5-12 17-7 27 5 9 15 13 24 10 5-2 9-5 12-10" fill="none" stroke={main} strokeWidth="5.6" strokeLinecap="round" />
+          <path d="m35 13-9 17h8l-5 18 16-22h-9l7-13Z" fill={accent} />
+          <circle cx="18" cy="21" r="2.5" fill={soft} />
+          <circle cx="48" cy="17" r="2.2" fill={soft} />
         </>
       );
 
     case 'gf-stackling':
       return (
         <>
-          <rect x="13" y="12" width="38" height="11" rx="5.5" fill={main} />
-          <rect x="17" y="27" width="34" height="11" rx="5.5" fill={accent} />
-          <rect x="21" y="42" width="30" height="11" rx="5.5" fill={soft} />
-          <path d="M19 17h8M23 32h8M27 47h8" stroke="#0b0e18" strokeWidth="3" strokeLinecap="round" opacity=".7" />
+          <path d="M14 12h36l4 5-4 7H14l-4-7 4-5Z" fill={main} />
+          <path d="M18 27h32l4 5-4 7H18l-4-7 4-5Z" fill={accent} />
+          <path d="M22 42h28l4 5-4 7H22l-4-7 4-5Z" fill={soft} />
+          <circle cx="19" cy="18" r="2" fill="#0b1020" opacity=".8" />
+          <circle cx="23" cy="33" r="2" fill="#0b1020" opacity=".8" />
+          <circle cx="27" cy="48" r="2" fill="#0b1020" opacity=".8" />
         </>
       );
 
     case 'gf-bugbite':
       return (
         <>
-          <rect x="20" y="18" width="24" height="28" rx="8" fill="none" stroke={main} strokeWidth="6" />
-          <path d="M26 18v-6M38 18v-6M20 25h-7M20 35h-7M44 25h7M44 35h7M26 46v6M38 46v6" stroke={soft} strokeWidth="4" strokeLinecap="round" />
-          <rect x="26" y="25" width="6" height="6" rx="2" fill={accent} />
-          <path d="M37 27h5M35 35l7 7" stroke={accent} strokeWidth="4" strokeLinecap="round" />
+          <path d="M22 20c0-5 4-8 10-8s10 3 10 8v25c0 5-4 8-10 8s-10-3-10-8V20Z" fill="none" stroke={main} strokeWidth="5.2" />
+          <path d="M27 12V8M37 12V8M22 25h-7M22 36h-8M42 25h7M42 36h8M27 53v4M37 53v4" stroke={soft} strokeWidth="3.2" strokeLinecap="round" />
+          <circle cx="28" cy="28" r="3.2" fill={accent} />
+          <path d="m35 27 8 2-5 5 5 5-9 2" fill="none" stroke={accent} strokeWidth="3.4" strokeLinecap="round" strokeLinejoin="round" />
+          <circle cx="48" cy="19" r="2.4" fill={soft} />
         </>
       );
 
     case 'gf-mergey':
       return (
         <>
-          <path d="M14 15c0 18 18 13 18 31" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <path d="M50 15c0 18-18 13-18 31" fill="none" stroke={accent} strokeWidth="6" strokeLinecap="round" />
-          <circle cx="14" cy="14" r="5" fill={main} />
-          <circle cx="50" cy="14" r="5" fill={accent} />
-          <circle cx="32" cy="50" r="6" fill={soft} />
+          <path d="M13 14c0 17 7 20 19 23 12-3 19-6 19-23" fill="none" stroke={main} strokeWidth="4.8" strokeLinecap="round" />
+          <path d="M32 37v15" stroke={accent} strokeWidth="5.2" strokeLinecap="round" />
+          <circle cx="13" cy="13" r="4.6" fill={main} />
+          <circle cx="51" cy="13" r="4.6" fill={accent} />
+          <path d="m27 35 5-5 5 5-5 5-5-5Z" fill={soft} />
+          <circle cx="32" cy="53" r="5" fill={accent} />
         </>
       );
 
@@ -284,11 +291,13 @@ const renderGlyph = (
     case 'gf-pixelbloom':
       return (
         <>
-          <rect x="13" y="13" width="15" height="15" rx="5" fill={main} transform="rotate(-8 20.5 20.5)" />
-          <rect x="36" y="13" width="15" height="15" rx="5" fill={accent} transform="rotate(8 43.5 20.5)" />
-          <rect x="13" y="36" width="15" height="15" rx="5" fill={soft} transform="rotate(8 20.5 43.5)" />
-          <rect x="36" y="36" width="15" height="15" rx="5" fill={main} transform="rotate(-8 43.5 43.5)" opacity=".75" />
-          <circle cx="32" cy="32" r="5" fill="#eef5ff" />
+          <rect x="26" y="26" width="12" height="12" rx="3.5" fill={soft} transform="rotate(8 32 32)" />
+          <rect x="11" y="23" width="12" height="12" rx="3.5" fill={main} transform="rotate(-12 17 29)" />
+          <rect x="41" y="20" width="12" height="12" rx="3.5" fill={accent} transform="rotate(12 47 26)" />
+          <rect x="20" y="41" width="11" height="11" rx="3.2" fill={accent} transform="rotate(9 25.5 46.5)" />
+          <rect x="39" y="39" width="9" height="9" rx="2.8" fill={main} opacity=".72" transform="rotate(-8 43.5 43.5)" />
+          <circle cx="12" cy="14" r="2.4" fill={soft} />
+          <circle cx="53" cy="43" r="2" fill={soft} />
         </>
       );
 
@@ -347,68 +356,76 @@ const renderGlyph = (
     case 'gf-agentawake':
       return (
         <>
-          <circle cx="32" cy="32" r="9" fill={main} />
-          <ellipse cx="32" cy="32" rx="22" ry="11" fill="none" stroke={accent} strokeWidth="4" transform="rotate(-18 32 32)" />
-          <ellipse cx="32" cy="32" rx="22" ry="11" fill="none" stroke={soft} strokeWidth="3" transform="rotate(54 32 32)" opacity=".8" />
-          <circle cx="50" cy="22" r="4" fill={accent} />
+          <path d="M20 32c0-9 5-16 12-16s12 7 12 16-5 16-12 16-12-7-12-16Z" fill="none" stroke={main} strokeWidth="4.8" />
+          <ellipse cx="32" cy="32" rx="23" ry="10" fill="none" stroke={accent} strokeWidth="3.2" transform="rotate(-16 32 32)" />
+          <circle cx="32" cy="32" r="5.5" fill={soft} />
+          <circle cx="31" cy="31" r="2" fill="#0b1020" />
+          <circle cx="50" cy="22" r="3.2" fill={accent} />
         </>
       );
 
     case 'gf-contextfull':
       return (
         <>
-          <path d="M15 42a21 21 0 0 1 34-22" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <path d="M20 47a16 16 0 0 0 27-17" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" />
-          <path d="M25 22a10 10 0 1 1 16 13" fill="none" stroke={soft} strokeWidth="4" strokeLinecap="round" />
-          <circle cx="22" cy="20" r="3" fill={accent} />
+          <path d="M12 38c-1-13 8-24 20-25 11-1 21 7 22 18" fill="none" stroke={main} strokeWidth="4.8" strokeLinecap="round" />
+          <path d="M17 44c8 9 24 10 31 0 4-5 5-10 4-15" fill="none" stroke={accent} strokeWidth="4.2" strokeLinecap="round" />
+          <path d="M23 24c4-6 13-7 18-2 5 5 4 13-1 18-5 4-12 4-17 0" fill="none" stroke={soft} strokeWidth="3.2" strokeLinecap="round" />
+          <circle cx="18" cy="19" r="2.8" fill={accent} />
+          <circle cx="43" cy="41" r="2.3" fill={soft} />
         </>
       );
 
     case 'gf-ghostwall':
       return (
         <>
-          <path d="M18 12v40" stroke={main} strokeWidth="7" strokeLinecap="round" />
-          <path d="M29 18v28M38 22v20M47 27v10" stroke={accent} strokeWidth="5" strokeLinecap="round" opacity=".9" />
-          <circle cx="50" cy="32" r="3" fill={soft} />
+          <path d="M16 11v42" stroke={main} strokeWidth="5.2" strokeLinecap="round" />
+          <path d="M27 17v30M37 21v22M46 25v14" stroke={accent} strokeWidth="4.2" strokeLinecap="round" opacity=".92" />
+          <path d="M12 18h8M12 32h8M12 46h8" stroke={soft} strokeWidth="2.4" strokeLinecap="round" opacity=".7" />
+          <circle cx="51" cy="32" r="3" fill={soft} />
         </>
       );
 
     case 'gf-zerotrace':
       return (
         <>
-          <circle cx="15" cy="40" r="7" fill={main} />
-          <circle cx="31" cy="31" r="5" fill={accent} opacity=".75" />
-          <circle cx="44" cy="23" r="3.5" fill={soft} opacity=".45" />
-          <circle cx="53" cy="17" r="2" fill={soft} opacity=".2" />
+          <path d="M12 45c10-3 15-9 20-15 6-7 11-12 21-14" fill="none" stroke={main} strokeWidth="3.4" strokeLinecap="round" strokeDasharray="1 7" opacity=".72" />
+          <circle cx="14" cy="44" r="6" fill={main} />
+          <circle cx="30" cy="32" r="4.6" fill={accent} opacity=".78" />
+          <circle cx="43" cy="23" r="3.2" fill={soft} opacity=".5" />
+          <circle cx="53" cy="16" r="1.8" fill={soft} opacity=".22" />
+          <path d="M45 42 18 15" stroke={soft} strokeWidth="3.2" strokeLinecap="round" opacity=".75" />
         </>
       );
 
     case 'gf-huntmark':
       return (
         <>
-          <path d="M32 9a23 23 0 1 0 20 12" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <circle cx="32" cy="32" r="10" fill="none" stroke={accent} strokeWidth="4" />
-          <path d="M32 17v7M32 40v7M17 32h7M40 32h7" stroke={soft} strokeWidth="4" strokeLinecap="round" />
-          <circle cx="48" cy="16" r="4" fill={accent} />
+          <path d="M32 9a23 23 0 1 0 20 12" fill="none" stroke={main} strokeWidth="4.8" strokeLinecap="round" />
+          <circle cx="32" cy="32" r="10" fill="none" stroke={accent} strokeWidth="3.6" />
+          <path d="M32 14v10M32 40v10M14 32h10M40 32h10" stroke={soft} strokeWidth="3.2" strokeLinecap="round" />
+          <path d="m28 32 4-4 4 4-4 4-4-4Z" fill={soft} />
+          <circle cx="49" cy="15" r="3.4" fill={accent} />
         </>
       );
 
     case 'gf-clientglow':
       return (
         <>
-          <circle cx="18" cy="34" r="8" fill={main} />
-          <circle cx="46" cy="30" r="8" fill={accent} />
-          <path d="M25 32c8-10 13-8 15-5" fill="none" stroke={soft} strokeWidth="5" strokeLinecap="round" />
-          <circle cx="32" cy="18" r="4" fill={soft} />
+          <circle cx="18" cy="36" r="7.5" fill={main} />
+          <circle cx="46" cy="31" r="7.5" fill={accent} />
+          <path d="M24 34c7-9 14-10 19-5" fill="none" stroke={soft} strokeWidth="4.2" strokeLinecap="round" />
+          <path d="M21 23c6-8 16-9 23-3" fill="none" stroke={main} strokeWidth="2.6" opacity=".55" strokeLinecap="round" />
+          <circle cx="32" cy="18" r="3.8" fill={soft} />
         </>
       );
 
     case 'gf-scopeclear':
       return (
         <>
-          <path d="M14 25V14h11M50 25V14H39M14 39v11h11M50 39v11H39" fill="none" stroke={main} strokeWidth="5" strokeLinecap="round" />
-          <rect x="24" y="24" width="16" height="16" rx="5" fill={accent} opacity=".9" />
-          <path d="M28 32h8" stroke="#0b0e18" strokeWidth="3" strokeLinecap="round" />
+          <path d="M13 24V13h11M51 24V13H40M13 40v11h11M51 40v11H40" fill="none" stroke={main} strokeWidth="4.2" strokeLinecap="round" />
+          <path d="m25 32 7-7 7 7-7 7-7-7Z" fill={accent} />
+          <circle cx="32" cy="32" r="3" fill={soft} />
+          <path d="M19 32h6M39 32h6" stroke={soft} strokeWidth="2.6" strokeLinecap="round" opacity=".72" />
         </>
       );
 
@@ -416,64 +433,72 @@ const renderGlyph = (
       return (
         <>
           <path d="m16 23 16-9 16 9-16 9-16-9Z" fill={main} />
-          <path d="M16 23v18l16 9 16-9V23" fill="none" stroke={accent} strokeWidth="5" strokeLinejoin="round" />
-          <path d="M38 17c8-5 13-3 16 1" fill="none" stroke={soft} strokeWidth="4" strokeLinecap="round" />
+          <path d="M16 23v18l16 9 16-9V23" fill="none" stroke={accent} strokeWidth="4.4" strokeLinejoin="round" />
+          <path d="m26 39 4 4 9-10" fill="none" stroke={soft} strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M39 16c7-4 12-2 15 1" fill="none" stroke={soft} strokeWidth="2.8" strokeLinecap="round" opacity=".7" />
         </>
       );
 
     case 'gf-flowlock':
       return (
         <>
-          <path d="M10 17h12c9 0 10 8 18 8h14M10 31h17c7 0 8 0 13 0h14M10 45h12c9 0 10-8 18-8h14" fill="none" stroke={main} strokeWidth="5" strokeLinecap="round" />
-          <rect x="43" y="24" width="11" height="14" rx="4" fill={accent} />
+          <path d="M9 18h12c9 0 10 8 19 8h14M9 32h18c7 0 8 0 14 0h13M9 46h12c9 0 10-8 19-8h14" fill="none" stroke={main} strokeWidth="4.2" strokeLinecap="round" />
+          <rect x="42" y="25" width="13" height="15" rx="4.5" fill={accent} />
+          <path d="M45 25v-3c0-4 2-6 4-6s4 2 4 6v3" fill="none" stroke={soft} strokeWidth="2.8" strokeLinecap="round" />
+          <circle cx="48.5" cy="33" r="1.8" fill="#0b1020" />
         </>
       );
 
     case 'gf-routepulse':
       return (
         <>
-          <path d="M13 45 24 18l15 21 12-20" fill="none" stroke={main} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
-          <circle cx="13" cy="45" r="5" fill={soft} />
-          <circle cx="24" cy="18" r="5" fill={accent} />
-          <circle cx="39" cy="39" r="5" fill={main} />
-          <circle cx="51" cy="19" r="5" fill={accent} />
+          <path d="M12 46 23 18l16 21 13-20" fill="none" stroke={main} strokeWidth="4.2" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M17 34h6l3-8 6 16 4-8h6" fill="none" stroke={soft} strokeWidth="2.8" strokeLinecap="round" strokeLinejoin="round" opacity=".78" />
+          <circle cx="12" cy="46" r="4.3" fill={soft} />
+          <circle cx="23" cy="18" r="4.3" fill={accent} />
+          <circle cx="39" cy="39" r="4.3" fill={main} />
+          <circle cx="52" cy="19" r="4.3" fill={accent} />
         </>
       );
 
     case 'gf-zerobacklog':
       return (
         <>
-          <rect x="13" y="14" width="38" height="8" rx="4" fill={main} />
-          <rect x="19" y="28" width="32" height="8" rx="4" fill={accent} />
-          <rect x="27" y="42" width="24" height="8" rx="4" fill={soft} />
-          <circle cx="12" cy="46" r="4" fill={accent} />
+          <path d="M13 16h38M19 30h32M27 44h24" stroke={main} strokeWidth="6.2" strokeLinecap="round" />
+          <circle cx="13" cy="16" r="4.2" fill={soft} />
+          <circle cx="19" cy="30" r="3.5" fill={accent} />
+          <circle cx="27" cy="44" r="3" fill={soft} />
+          <path d="m13 50 7 5 11-12" fill="none" stroke={accent} strokeWidth="3.6" strokeLinecap="round" strokeLinejoin="round" />
         </>
       );
 
     case 'gf-respectpulse':
       return (
         <>
-          <path d="M10 35c7-13 15-18 22-9 7-9 15-4 22 9" fill="none" stroke={main} strokeWidth="6" strokeLinecap="round" />
-          <path d="M18 42c8 8 20 8 28 0" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" />
-          <circle cx="32" cy="24" r="4" fill={soft} />
+          <path d="M10 36c6-12 14-18 22-9 8-9 16-3 22 9" fill="none" stroke={main} strokeWidth="4.8" strokeLinecap="round" />
+          <path d="M18 43c8 7 20 7 28 0" fill="none" stroke={accent} strokeWidth="4.2" strokeLinecap="round" />
+          <path d="M23 20c3-4 6-5 9-1 3-4 6-3 9 1-1 6-5 9-9 12-4-3-8-6-9-12Z" fill={soft} />
         </>
       );
 
     case 'gf-goodvibe':
       return (
         <>
-          <circle cx="32" cy="32" r="22" fill="none" stroke={main} strokeWidth="6" />
-          <path d="M15 33c6-8 12-8 17 0s11 8 17 0" fill="none" stroke={accent} strokeWidth="5" strokeLinecap="round" />
-          <circle cx="48" cy="16" r="4" fill={soft} />
+          <circle cx="32" cy="32" r="22" fill="none" stroke={main} strokeWidth="4.5" />
+          <path d="M14 33c6-8 12-8 18 0s12 8 18 0" fill="none" stroke={accent} strokeWidth="4.2" strokeLinecap="round" />
+          <path d="M18 24c4-4 8-4 12 0M35 22c4-4 8-4 11 0" fill="none" stroke={soft} strokeWidth="2.4" strokeLinecap="round" opacity=".7" />
+          <circle cx="48" cy="16" r="3.3" fill={soft} />
         </>
       );
 
     case 'gf-supportlink':
       return (
         <>
-          <path d="M13 36c0-8 6-14 14-14h8" fill="none" stroke={main} strokeWidth="7" strokeLinecap="round" />
-          <path d="M51 28c0 8-6 14-14 14h-8" fill="none" stroke={accent} strokeWidth="7" strokeLinecap="round" />
-          <circle cx="32" cy="32" r="5" fill={soft} />
+          <path d="M12 37c0-9 6-15 15-15h9" fill="none" stroke={main} strokeWidth="5.4" strokeLinecap="round" />
+          <path d="M52 27c0 9-6 15-15 15h-9" fill="none" stroke={accent} strokeWidth="5.4" strokeLinecap="round" />
+          <path d="m26 32 6-6 6 6-6 6-6-6Z" fill={soft} />
+          <circle cx="16" cy="22" r="2.6" fill={soft} />
+          <circle cx="48" cy="42" r="2.6" fill={soft} />
         </>
       );
   }
