@@ -19,6 +19,7 @@ import {
   loadConversation,
   saveEncryptedMessage
 } from '../lib/storage';
+import { AvatarToken } from './AvatarToken';
 
 interface MessagesViewProps {
   currentUser: UserProfile;
@@ -157,7 +158,11 @@ export const MessagesView = memo(({ currentUser, feed, onClose }: MessagesViewPr
               onClick={() => setSelectedUserId(contact.id)}
               type="button"
             >
-              <span className="avatar">{contact.name.slice(0, 1).toUpperCase()}</span>
+              <AvatarToken
+                active={selectedUserId === contact.id}
+                name={contact.name}
+                size="md"
+              />
               <span>
                 <strong>{contact.name}</strong>
                 <small>@{contact.handle}</small>
@@ -177,9 +182,7 @@ export const MessagesView = memo(({ currentUser, feed, onClose }: MessagesViewPr
         {selectedContact ? (
           <>
             <header className="messages-chat-head">
-              <span className="avatar avatar-large">
-                {selectedContact.name.slice(0, 1).toUpperCase()}
-              </span>
+              <AvatarToken name={selectedContact.name} online size="lg" />
               <div>
                 <strong>{selectedContact.name}</strong>
                 <span>@{selectedContact.handle}</span>
