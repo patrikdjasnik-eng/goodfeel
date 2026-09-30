@@ -58,7 +58,7 @@ export const FeedCard = memo(({ item, onLike }: FeedCardProps) => {
   }, [item, liked, onLike]);
 
   return (
-    <article className="feed-card surface">
+    <article className="feed-card">
       <header className="feed-card-header">
         <span className="avatar">{item.author.name.slice(0, 1).toUpperCase()}</span>
         <div className="feed-author">
