@@ -74,56 +74,77 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
   return (
     <main className="auth-shell">
       <section className="auth-pitch glass-panel">
-        <BrandLockup />
+        <div className="auth-pitch-main">
+          <BrandLockup />
 
-        <div className="auth-copy">
-          <p className="eyebrow">Sociální síť pro skutečnou práci</p>
-          <h1>
-            Skuteční lidé.<br />
-            Skutečná práce.<br />
-            <span>Větší možnosti.</span>
-          </h1>
-          <p>
-            Profily, projekty, nabídky práce a přirozené konverzace na jednom místě.
-            Reputace vzniká z toho, co opravdu dokončíte.
-          </p>
+          <div className="auth-copy">
+            <p className="eyebrow">Sociální síť pro skutečnou práci</p>
+            <h1>
+              Skuteční lidé.<br />
+              Skutečná práce.<br />
+              <span>Větší možnosti.</span>
+            </h1>
+            <p>
+              Profily, projekty, nabídky práce a přirozené konverzace na jednom místě.
+              Reputace vzniká z toho, co opravdu dokončíte.
+            </p>
 
-          <div className="auth-proof-row" aria-label="Goodfeel developer preview">
-            <span><CheckCircle2 size={15} /> Proof of Work</span>
-            <span><CheckCircle2 size={15} /> Local-first MVP</span>
-            <span><CheckCircle2 size={15} /> PWA ready</span>
+            <div className="auth-proof-row" aria-label="Goodfeel developer preview">
+              <span><CheckCircle2 size={15} /> Proof of Work</span>
+              <span><CheckCircle2 size={15} /> Local-first MVP</span>
+              <span><CheckCircle2 size={15} /> PWA ready</span>
+            </div>
           </div>
-        </div>
 
-        <div className="feature-list">
-          <article>
-            <BadgeCheck size={21} />
-            <div>
-              <strong>Proof of Work</strong>
-              <span>Dokončené projekty mohou potvrdit skuteční klienti.</span>
+          <div className="feature-list">
+            <article>
+              <span className="feature-icon"><BadgeCheck size={20} /></span>
+              <div>
+                <strong>Proof of Work</strong>
+                <span>Dokončené projekty mohou potvrdit skuteční klienti.</span>
+              </div>
+            </article>
+            <article>
+              <span className="feature-icon"><Briefcase size={20} /></span>
+              <div>
+                <strong>Práce a služby</strong>
+                <span>Nabídky spolupráce nejsou schované mimo komunitu.</span>
+              </div>
+            </article>
+            <article>
+              <span className="feature-icon"><Users size={20} /></span>
+              <div>
+                <strong>Lidé místo korporátního divadla</strong>
+                <span>Krátké příspěvky, diskuze, projekty a reálné zkušenosti.</span>
+              </div>
+            </article>
+            <article>
+              <span className="feature-icon"><BarChart3 size={20} /></span>
+              <div>
+                <strong>Reputace roste s prací</strong>
+                <span>Ne podle počtu prázdných endorsementů.</span>
+              </div>
+            </article>
+          </div>
+
+          <div className="auth-signal-card">
+            <div className="auth-signal-copy">
+              <span className="auth-signal-kicker">
+                <BadgeCheck size={16} />
+                Proof of Work
+              </span>
+              <strong>Reputace vzniká z dokončené práce.</strong>
+              <p>Projekt, výsledek a potvrzení klientem v jednom jasném toku.</p>
             </div>
-          </article>
-          <article>
-            <Briefcase size={21} />
-            <div>
-              <strong>Práce a služby</strong>
-              <span>Nabídky spolupráce nejsou schované mimo komunitu.</span>
+
+            <div className="auth-signal-flow" aria-label="Tok ověření práce">
+              <span>Projekt</span>
+              <i />
+              <span>Výsledek</span>
+              <i />
+              <span className="verified-step">Ověřeno</span>
             </div>
-          </article>
-          <article>
-            <Users size={21} />
-            <div>
-              <strong>Lidé místo korporátního divadla</strong>
-              <span>Krátké příspěvky, diskuze, projekty a reálné zkušenosti.</span>
-            </div>
-          </article>
-          <article>
-            <BarChart3 size={21} />
-            <div>
-              <strong>Reputace roste s prací</strong>
-              <span>Ne podle počtu prázdných endorsementů.</span>
-            </div>
-          </article>
+          </div>
         </div>
       </section>
 
