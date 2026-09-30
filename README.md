@@ -142,6 +142,12 @@ public/
 
 `App.tsx` je aplikační bootstrap: inicializuje IndexedDB, načte feed, obnoví session a přepíná mezi loginem a dashboardem. Citlivé budoucí operace, zejména potvrzování projektů klientem, zůstávají mimo lokální autoritu.
 
+## Vývoj a náklady
+
+Průběžná roadmapa, odhady práce, rozpočet do veřejné bety a evidence budoucích provozních nákladů jsou v:
+
+[`docs/development/ROADMAP_AND_COSTS.md`](./docs/development/ROADMAP_AND_COSTS.md)
+
 ## Architektura další fáze
 
 Další fáze má oddělit frontend od API a přesunout citlivé operace na server.
