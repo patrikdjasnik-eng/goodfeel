@@ -1,4 +1,12 @@
-import { FormEvent, memo, useCallback, useMemo, useState } from 'react';
+import {
+  FormEvent,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState
+} from 'react';
 import {
   Briefcase,
   ChevronUp,
@@ -9,6 +17,9 @@ import {
   Wrench
 } from 'lucide-react';
 import type { ContentKind, FeedItem, UserProfile } from '../types';
+import type { WorkmojiDefinition } from '../workmoji/catalog';
+import { WorkmojiMark } from './WorkmojiMark';
+import { WorkmojiPicker } from './WorkmojiPicker';
 
 interface ComposerProps {
   user: UserProfile;
@@ -29,6 +40,9 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
   const [body, setBody] = useState('');
   const [tags, setTags] = useState('');
   const [busy, setBusy] = useState(false);
+  const [workmojiOpen, setWorkmojiOpen] = useState(false);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const workmojiAnchorRef = useRef<HTMLDivElement>(null);
 
   const placeholder = useMemo(() => {
     if (kind === 'project') return 'Co jste postavili, dokončili nebo právě stavíte?';
@@ -36,6 +50,54 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
     if (kind === 'job') return 'Koho hledáte a na jakou spolupráci?';
     return 'Co právě stavíte, řešíte nebo jste se naučili?';
   }, [kind]);
+
+  useEffect(() => {
+    if (!workmojiOpen) return;
+
+    const handlePointerDown = (event: PointerEvent) => {
+      const target = event.target;
+
+      if (
+        target instanceof Node &&
+        workmojiAnchorRef.current &&
+        !workmojiAnchorRef.current.contains(target)
+      ) {
+        setWorkmojiOpen(false);
+      }
+    };
+
+    document.addEventListener('pointerdown', handlePointerDown);
+
+    return () => {
+      document.removeEventListener('pointerdown', handlePointerDown);
+    };
+  }, [workmojiOpen]);
+
+  const insertWorkmoji = useCallback(
+    (workmoji: WorkmojiDefinition) => {
+      const textarea = textareaRef.current;
+      const start = textarea?.selectionStart ?? body.length;
+      const end = textarea?.selectionEnd ?? body.length;
+      const needsLeadingSpace = start > 0 && !/\s/.test(body[start - 1] ?? '');
+      const needsTrailingSpace = end < body.length && !/\s/.test(body[end] ?? '');
+      const insertion = `${needsLeadingSpace ? ' ' : ''}${workmoji.token}${needsTrailingSpace ? ' ' : ' '}`;
+      const nextBody = `${body.slice(0, start)}${insertion}${body.slice(end)}`;
+
+      if (nextBody.length > 1200) return;
+
+      setBody(nextBody);
+      setWorkmojiOpen(false);
+
+      requestAnimationFrame(() => {
+        const nextTextarea = textareaRef.current;
+        const cursorPosition = start + insertion.length;
+
+        nextTextarea?.focus();
+        nextTextarea?.setSelectionRange(cursorPosition, cursorPosition);
+      });
+    },
+    [body]
+  );
 
   const submit = useCallback(
     async (event: FormEvent<HTMLFormElement>) => {
@@ -69,6 +131,7 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
         setBody('');
         setTags('');
         setKind('post');
+        setWorkmojiOpen(false);
         setExpanded(false);
       } finally {
         setBusy(false);
@@ -109,7 +172,10 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
         <button
           aria-label="Sbalit editor"
           className="composer-collapse"
-          onClick={() => setExpanded(false)}
+          onClick={() => {
+            setWorkmojiOpen(false);
+            setExpanded(false);
+          }}
           type="button"
         >
           <ChevronUp size={18} />
@@ -145,12 +211,34 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
         maxLength={1200}
         onChange={(event) => setBody(event.target.value)}
         placeholder={placeholder}
+        ref={textareaRef}
         required
         rows={kind === 'post' ? 2 : 3}
         value={body}
       />
 
       <div className="composer-footer">
+        <div className="workmoji-anchor" ref={workmojiAnchorRef}>
+          <button
+            aria-expanded={workmojiOpen}
+            aria-haspopup="dialog"
+            className={`workmoji-trigger ${workmojiOpen ? 'active' : ''}`.trim()}
+            onClick={() => setWorkmojiOpen((current) => !current)}
+            title="Goodfeel Workmoji"
+            type="button"
+          >
+            <WorkmojiMark id="gf-spark" size={19} />
+            <span>Workmoji</span>
+          </button>
+
+          {workmojiOpen && (
+            <WorkmojiPicker
+              onClose={() => setWorkmojiOpen(false)}
+              onSelect={insertWorkmoji}
+            />
+          )}
+        </div>
+
         <input
           aria-label="Tagy"
           onChange={(event) => setTags(event.target.value)}
