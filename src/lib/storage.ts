@@ -200,7 +200,20 @@ export const loadPublicProfiles = async (): Promise<UserProfile[]> => {
   return accounts.map(({ passwordHash: _passwordHash, ...profile }) => profile);
 };
 
-export const deleteFeedItem = async (itemId: string): Promise<void> => {
+export const deleteFeedItem = async (
+  itemId: string,
+  actorUserId: string
+): Promise<void> => {
+  const item = await getRecord<FeedItem>(feedStore, itemId);
+
+  if (!item) {
+    throw new Error('Příspěvek už neexistuje.');
+  }
+
+  if (item.author.id !== actorUserId) {
+    throw new Error('Cizí příspěvek nelze smazat.');
+  }
+
   const database = await openDatabase();
 
   await new Promise<void>((resolve, reject) => {
@@ -211,6 +224,29 @@ export const deleteFeedItem = async (itemId: string): Promise<void> => {
   });
 
   database.close();
+};
+
+export const updateOwnedFeedItem = async (
+  item: FeedItem,
+  actorUserId: string
+): Promise<void> => {
+  const storedItem = await getRecord<FeedItem>(feedStore, item.id);
+
+  if (!storedItem) {
+    throw new Error('Příspěvek už neexistuje.');
+  }
+
+  if (storedItem.author.id !== actorUserId || item.author.id !== actorUserId) {
+    throw new Error('Cizí příspěvek nelze upravit.');
+  }
+
+  await putRecord(feedStore, {
+    ...item,
+    author: storedItem.author,
+    createdAt: storedItem.createdAt,
+    likes: storedItem.likes,
+    comments: storedItem.comments
+  });
 };
 
 export const saveEncryptedMessage = async (
