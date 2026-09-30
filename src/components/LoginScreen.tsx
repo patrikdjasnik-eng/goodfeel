@@ -1,20 +1,15 @@
 import { FormEvent, memo, useCallback, useState } from 'react';
 import {
   ArrowRight,
-  BadgeCheck,
-  BarChart3,
-  Briefcase,
-  CheckCircle2,
   Eye,
   EyeOff,
   LockKeyhole,
   Mail,
-  ShieldCheck,
   Users
 } from 'lucide-react';
 import type { UserProfile } from '../types';
 import { login, register } from '../lib/storage';
-import { BrandLockup } from './Brand';
+import { BrandLockup, BrandMark } from './Brand';
 
 interface LoginScreenProps {
   onAuthenticated: (user: UserProfile) => void;
@@ -73,129 +68,65 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
 
   return (
     <main className="auth-shell">
-      <section className="auth-pitch glass-panel">
-        <div className="auth-pitch-main">
+      <section className="auth-hero" aria-label="Goodfeel">
+        <div className="auth-brand">
           <BrandLockup />
+        </div>
 
-          <div className="auth-copy">
-            <p className="eyebrow">Sociální síť pro skutečnou práci</p>
-            <h1>
-              Skuteční lidé.<br />
-              Skutečná práce.<br />
-              <span>Větší možnosti.</span>
-            </h1>
-            <p>
-              Profily, projekty, nabídky práce a přirozené konverzace na jednom místě.
-              Reputace vzniká z toho, co opravdu dokončíte.
-            </p>
+        <div className="auth-visual" aria-hidden="true">
+          <span className="auth-orbit auth-orbit-one" />
+          <span className="auth-orbit auth-orbit-two" />
+          <span className="auth-orbit auth-orbit-three" />
 
-            <div className="auth-proof-row" aria-label="Goodfeel developer preview">
-              <span><CheckCircle2 size={15} /> Proof of Work</span>
-              <span><CheckCircle2 size={15} /> Local-first MVP</span>
-              <span><CheckCircle2 size={15} /> PWA ready</span>
-            </div>
+          <div className="auth-visual-logo">
+            <BrandMark />
           </div>
 
-          <div className="feature-list">
-            <article>
-              <span className="feature-icon"><BadgeCheck size={20} /></span>
-              <div>
-                <strong>Proof of Work</strong>
-                <span>Dokončené projekty mohou potvrdit skuteční klienti.</span>
-              </div>
-            </article>
-            <article>
-              <span className="feature-icon"><Briefcase size={20} /></span>
-              <div>
-                <strong>Práce a služby</strong>
-                <span>Nabídky spolupráce nejsou schované mimo komunitu.</span>
-              </div>
-            </article>
-            <article>
-              <span className="feature-icon"><Users size={20} /></span>
-              <div>
-                <strong>Lidé místo korporátního divadla</strong>
-                <span>Krátké příspěvky, diskuze, projekty a reálné zkušenosti.</span>
-              </div>
-            </article>
-            <article>
-              <span className="feature-icon"><BarChart3 size={20} /></span>
-              <div>
-                <strong>Reputace roste s prací</strong>
-                <span>Ne podle počtu prázdných endorsementů.</span>
-              </div>
-            </article>
-          </div>
+          <span className="auth-visual-dot auth-visual-dot-one" />
+          <span className="auth-visual-dot auth-visual-dot-two" />
+          <span className="auth-visual-dot auth-visual-dot-three" />
+        </div>
 
-          <div className="auth-signal-card">
-            <div className="auth-signal-copy">
-              <span className="auth-signal-kicker">
-                <BadgeCheck size={16} />
-                Proof of Work
-              </span>
-              <strong>Reputace vzniká z dokončené práce.</strong>
-              <p>Projekt, výsledek a potvrzení klientem v jednom jasném toku.</p>
-            </div>
-
-            <div className="auth-signal-flow" aria-label="Tok ověření práce">
-              <span>Projekt</span>
-              <i />
-              <span>Výsledek</span>
-              <i />
-              <span className="verified-step">Ověřeno</span>
-            </div>
-          </div>
+        <div className="auth-hero-copy">
+          <p className="auth-kicker">Sociální síť pro skutečnou práci</p>
+          <h1>
+            Skuteční lidé.<br />
+            Skutečná práce.<br />
+            <span>Větší možnosti.</span>
+          </h1>
+          <p>
+            Profily, projekty, nabídky práce a přirozené konverzace na jednom místě.
+            Reputace vzniká z toho, co opravdu dokončíte.
+          </p>
         </div>
       </section>
 
-      <section className="auth-card glass-panel">
-        <div className="auth-card-inner">
-          <div className="auth-card-status">
-            <span><ShieldCheck size={15} /> Developer Preview</span>
-            <small>v0.1</small>
-          </div>
-
-          <div className="auth-tabs" role="tablist" aria-label="Přihlášení nebo registrace">
-            <button
-              aria-selected={mode === 'login'}
-              className={mode === 'login' ? 'active' : ''}
-              onClick={() => switchMode('login')}
-              role="tab"
-              type="button"
-            >
-              Přihlášení
-            </button>
-            <button
-              aria-selected={mode === 'register'}
-              className={mode === 'register' ? 'active' : ''}
-              onClick={() => switchMode('register')}
-              role="tab"
-              type="button"
-            >
-              Registrace
-            </button>
-          </div>
-
+      <section className="auth-login">
+        <div className="auth-login-inner">
           <div className="auth-heading">
-            <p className="eyebrow">Goodfeel</p>
-            <h2>{mode === 'login' ? 'Vítejte zpět' : 'Vytvořte si profil'}</h2>
+            <p className="auth-login-kicker">Goodfeel</p>
+            <h2>
+              {mode === 'login'
+                ? 'Přihlásit se do Goodfeel'
+                : 'Vytvořit nový účet'}
+            </h2>
             <p>
               {mode === 'login'
                 ? 'Pokračujte tam, kde jste skončili.'
-                : 'Začněte publikovat práci, služby a projekty.'}
+                : 'Začněte sdílet projekty, práci a výsledky.'}
             </p>
           </div>
 
           <form className="auth-form" onSubmit={submit}>
             {mode === 'register' && (
-              <label className="field-label">
-                <span className="field-label-text">Jméno</span>
+              <label className="auth-field">
+                <span className="sr-only">Jméno</span>
                 <span className="input-wrap">
                   <Users size={18} />
                   <input
                     autoComplete="name"
                     onChange={(event) => setName(event.target.value)}
-                    placeholder="Vaše jméno"
+                    placeholder="Jméno"
                     required
                     value={name}
                   />
@@ -203,15 +134,15 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
               </label>
             )}
 
-            <label className="field-label">
-              <span className="field-label-text">E-mail</span>
+            <label className="auth-field">
+              <span className="sr-only">E-mail</span>
               <span className="input-wrap">
                 <Mail size={18} />
                 <input
                   autoCapitalize="none"
                   autoComplete="email"
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="vy@example.com"
+                  placeholder="E-mail"
                   required
                   spellCheck={false}
                   type="email"
@@ -220,15 +151,15 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
               </span>
             </label>
 
-            <label className="field-label">
-              <span className="field-label-text">Heslo</span>
+            <label className="auth-field">
+              <span className="sr-only">Heslo</span>
               <span className="input-wrap">
                 <LockKeyhole size={18} />
                 <input
                   autoComplete={mode === 'login' ? 'current-password' : 'new-password'}
                   minLength={mode === 'register' ? 8 : undefined}
                   onChange={(event) => setPassword(event.target.value)}
-                  placeholder={mode === 'register' ? 'Alespoň 8 znaků' : 'Vaše heslo'}
+                  placeholder={mode === 'register' ? 'Heslo · alespoň 8 znaků' : 'Heslo'}
                   required
                   type={showPassword ? 'text' : 'password'}
                   value={password}
@@ -246,7 +177,7 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
 
             {error && <p className="form-error" role="alert">{error}</p>}
 
-            <button className="primary-button auth-submit" disabled={busy} type="submit">
+            <button className="auth-submit" disabled={busy} type="submit">
               <span>
                 {busy
                   ? 'Pracuji…'
@@ -258,19 +189,50 @@ export const LoginScreen = memo(({ onAuthenticated }: LoginScreenProps) => {
             </button>
           </form>
 
-          <div className="demo-login">
-            <div>
-              <strong>Jen si Goodfeel prohlédnout?</strong>
-              <span>Použijte lokální demo účet bez registrace.</span>
-            </div>
-            <button onClick={fillDemo} type="button">
-              Vyplnit demo účet
-            </button>
-            <small>demo@goodfeel.local · goodfeel</small>
-          </div>
+          {mode === 'login' ? (
+            <>
+              <button className="auth-text-action" onClick={fillDemo} type="button">
+                Použít demo účet
+              </button>
+
+              <div className="auth-divider">
+                <span />
+              </div>
+
+              <button
+                className="auth-secondary-action"
+                onClick={() => switchMode('register')}
+                type="button"
+              >
+                Vytvořit nový účet
+              </button>
+            </>
+          ) : (
+            <>
+              <button
+                className="auth-text-action"
+                onClick={() => switchMode('login')}
+                type="button"
+              >
+                Už mám účet
+              </button>
+
+              <div className="auth-divider">
+                <span />
+              </div>
+
+              <button
+                className="auth-secondary-action"
+                onClick={fillDemo}
+                type="button"
+              >
+                Vyzkoušet demo účet
+              </button>
+            </>
+          )}
 
           <p className="auth-note">
-            Developer Preview ukládá účet pouze lokálně v tomto prohlížeči.
+            Developer Preview · účet se zatím ukládá pouze lokálně v tomto prohlížeči.
           </p>
         </div>
       </section>
