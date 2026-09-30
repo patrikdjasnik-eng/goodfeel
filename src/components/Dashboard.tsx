@@ -180,14 +180,6 @@ export const Dashboard = memo(({ user, feed, onCreate, onLike, onLogout }: Dashb
                 </div>
               </div>
 
-              <div className="space-ambient" aria-hidden="true">
-                <span className="space-ambient-orbit space-ambient-orbit-one" />
-                <span className="space-ambient-orbit space-ambient-orbit-two" />
-                <span className="space-ambient-core" />
-                <span className="space-ambient-dot" />
-              </div>
-
-              <span className="space-status"><i /> Všechno je na svém místě</span>
             </div>
 
             <Composer onCreate={onCreate} user={user} />
