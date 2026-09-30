@@ -25,7 +25,7 @@ export const BrandMark = memo(({ className = '' }: BrandMarkProps) => {
           id={mainGradientId}
           x1="11"
           x2="54"
-          y1="7"
+          y1="8"
           y2="57"
           gradientUnits="userSpaceOnUse"
         >
@@ -37,10 +37,10 @@ export const BrandMark = memo(({ className = '' }: BrandMarkProps) => {
 
         <linearGradient
           id={flowGradientId}
-          x1="13"
-          x2="44"
-          y1="43"
-          y2="52"
+          x1="11"
+          x2="43"
+          y1="41"
+          y2="54"
           gradientUnits="userSpaceOnUse"
         >
           <stop offset="0" stopColor="#67e4ff" />
@@ -49,35 +49,24 @@ export const BrandMark = memo(({ className = '' }: BrandMarkProps) => {
         </linearGradient>
       </defs>
 
-      <circle
-        cx="29.5"
-        cy="33.5"
+      <path
+        d="M45.5 17.2C40.8 12 34.5 9.8 27.7 10.5C17.3 11.6 9.5 20.2 9.5 31.2C9.5 43.7 18.7 53.3 30.8 53.3C42.6 53.3 51.2 45.6 51.2 35.9V31.4H37.8"
         fill="none"
-        r="20"
         stroke={`url(#${mainGradientId})`}
-        strokeDasharray="101 25"
         strokeLinecap="round"
-        strokeWidth="10.8"
-        transform="rotate(-26 29.5 33.5)"
+        strokeLinejoin="round"
+        strokeWidth="10.6"
       />
 
       <path
-        d="M17.2 43.3C22.8 49 30.8 51.5 38.7 48.9C42.3 47.7 45.5 45.7 48.1 42.9"
+        d="M14.2 41.5C18.4 48.5 25.3 52.3 32.9 52.4C37.3 52.5 41.5 51.3 45 49.2"
         fill="none"
         stroke={`url(#${flowGradientId})`}
         strokeLinecap="round"
-        strokeWidth="4.4"
+        strokeWidth="4.2"
       />
 
-      <path
-        d="M34.2 31.6H47.8"
-        fill="none"
-        stroke={`url(#${mainGradientId})`}
-        strokeLinecap="round"
-        strokeWidth="6.7"
-      />
-
-      <circle cx="50.7" cy="12.2" fill={`url(#${mainGradientId})`} r="4.3" />
+      <circle cx="50.7" cy="11.8" fill={`url(#${mainGradientId})`} r="4.15" />
     </svg>
   );
 });
