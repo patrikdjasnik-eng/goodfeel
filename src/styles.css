@@ -767,11 +767,6 @@ textarea::-moz-selection {
     inset 0 1px 0 rgba(255, 255, 255, 0.15);
 }
 
-.auth-submit::before {
-  content: "";
-  position: absolute;
-}
-
 .auth-submit svg {
   transition: transform 150ms ease;
 }
@@ -1822,18 +1817,6 @@ textarea::-moz-selection {
 }
 
 @media (max-width: 1180px) {
-  .auth-shell {
-    grid-template-columns: 1fr 430px;
-  }
-
-  .feature-list {
-    grid-template-columns: 1fr;
-  }
-
-  .feature-list article:nth-child(n + 3) {
-    display: none;
-  }
-
   .dashboard-grid {
     grid-template-columns: minmax(0, 1fr) 290px;
   }
@@ -1844,30 +1827,6 @@ textarea::-moz-selection {
 }
 
 @media (max-width: 980px) {
-  .auth-shell {
-    grid-template-columns: 1fr;
-  }
-
-  .auth-pitch {
-    min-height: auto;
-  }
-
-  .auth-copy {
-    margin: 64px 0;
-  }
-
-  .feature-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .feature-list article:nth-child(n) {
-    display: flex;
-  }
-
-  .auth-card {
-    min-height: auto;
-  }
-
   .right-column {
     display: none;
   }
@@ -1879,40 +1838,6 @@ textarea::-moz-selection {
 }
 
 @media (max-width: 760px) {
-  .auth-shell {
-    gap: 12px;
-    padding: 12px;
-  }
-
-  .auth-pitch,
-  .auth-card {
-    border-radius: 21px;
-  }
-
-  .auth-pitch {
-    padding: 26px;
-  }
-
-  .auth-copy {
-    margin: 50px 0 34px;
-  }
-
-  .auth-copy h1 {
-    font-size: clamp(2.5rem, 13vw, 4.2rem);
-  }
-
-  .feature-list {
-    grid-template-columns: 1fr;
-  }
-
-  .feature-list article:nth-child(n + 3) {
-    display: none;
-  }
-
-  .auth-card {
-    padding: 28px 22px;
-  }
-
   .sidebar {
     transform: translateX(-102%);
     transition: transform 190ms ease;
@@ -1963,19 +1888,7 @@ textarea::-moz-selection {
 }
 
 @media (max-width: 560px) {
-  .auth-pitch {
-    display: block;
-  }
-
-  .auth-copy {
-    margin-bottom: 0;
-  }
-
-  .feature-list {
-    display: none;
-  }
-
-  .brand-tagline {
+  .sidebar .brand-tagline {
     display: none;
   }
 
@@ -2025,9 +1938,6 @@ textarea::-moz-selection {
 
   .send-button {
     padding: 0 10px;
-  }
-
-  .send-button {
     font-size: 0;
   }
 
