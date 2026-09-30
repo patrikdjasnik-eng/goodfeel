@@ -15,6 +15,7 @@ interface WorkmojiPickerProps {
 
 export const WorkmojiPicker = memo(({ onClose, onSelect }: WorkmojiPickerProps) => {
   const [category, setCategory] = useState<'all' | WorkmojiCategory>('all');
+  const [preview, setPreview] = useState<WorkmojiDefinition>(workmojiCatalog[0]);
 
   const visibleWorkmoji = useMemo(
     () =>
@@ -23,6 +24,14 @@ export const WorkmojiPicker = memo(({ onClose, onSelect }: WorkmojiPickerProps) 
         : workmojiCatalog.filter((workmoji) => workmoji.category === category),
     [category]
   );
+
+  useEffect(() => {
+    const firstVisible = visibleWorkmoji[0];
+
+    if (firstVisible) {
+      setPreview(firstVisible);
+    }
+  }, [visibleWorkmoji]);
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -47,7 +56,7 @@ export const WorkmojiPicker = memo(({ onClose, onSelect }: WorkmojiPickerProps) 
       <header className="workmoji-picker-head">
         <div>
           <strong>Goodfeel Workmoji</strong>
-          <span>Vyber symbol, který mluví za tvoji práci.</span>
+          <span>Každý obor má vlastní způsob, jak říct „tohle sedí“.</span>
         </div>
         <button
           aria-label="Zavřít Workmoji"
@@ -58,6 +67,17 @@ export const WorkmojiPicker = memo(({ onClose, onSelect }: WorkmojiPickerProps) 
           <X size={18} />
         </button>
       </header>
+
+      <div className="workmoji-preview">
+        <div className="workmoji-preview-mark">
+          <WorkmojiMark id={preview.id} size={76} />
+        </div>
+        <div>
+          <span>{preview.category}</span>
+          <strong>{preview.label}</strong>
+          <p>{preview.description}</p>
+        </div>
+      </div>
 
       <div className="workmoji-tabs" role="tablist" aria-label="Kategorie Workmoji">
         {workmojiCategories.map((item) => (
@@ -78,13 +98,15 @@ export const WorkmojiPicker = memo(({ onClose, onSelect }: WorkmojiPickerProps) 
         {visibleWorkmoji.map((workmoji) => (
           <button
             aria-label={`${workmoji.label}: ${workmoji.description}`}
-            className="workmoji-option"
+            className={preview.id === workmoji.id ? 'workmoji-option previewed' : 'workmoji-option'}
             key={workmoji.id}
             onClick={() => onSelect(workmoji)}
+            onFocus={() => setPreview(workmoji)}
+            onMouseEnter={() => setPreview(workmoji)}
             title={`${workmoji.label} — ${workmoji.description}`}
             type="button"
           >
-            <WorkmojiMark id={workmoji.id} size={34} />
+            <WorkmojiMark id={workmoji.id} size={38} />
             <span>{workmoji.label}</span>
           </button>
         ))}
