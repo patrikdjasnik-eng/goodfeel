@@ -108,7 +108,7 @@ const bytesToBase64 = (bytes: Uint8Array): string => {
   return btoa(binary);
 };
 
-const base64ToBytes = (value: string): Uint8Array => {
+const base64ToBytes = (value: string): Uint8Array<ArrayBuffer> => {
   const binary = atob(value);
 
   return Uint8Array.from(binary, (character) => character.charCodeAt(0));

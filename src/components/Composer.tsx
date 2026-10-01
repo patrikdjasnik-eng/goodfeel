@@ -89,7 +89,6 @@ export const Composer = memo(({ user, onCreate }: ComposerProps) => {
 
   const insertWorkmoji = useCallback(
     (workmoji: WorkmojiDefinition) => {
-      const textarea = textareaRef.current;
       const { start, end } = selectionRef.current;
       const needsLeadingSpace = start > 0 && !/\s/.test(body[start - 1] ?? '');
       const needsTrailingSpace = end < body.length && !/\s/.test(body[end] ?? '');
