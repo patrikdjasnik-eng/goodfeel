@@ -173,7 +173,7 @@ const deriveConversationKey = async (
 
 const blockedMessagePatterns: ReadonlyArray<RegExp> = [
   /\b(child\s*(porn|sexual|abuse)|csam)\b/i,
-  /\b(dětsk(?:á|é|ou)\s*pornograf(?:ie|ii)|sexuální\s*zneužívání\s*dětí)\b/i,
+  /(?<![\p{L}\p{N}])(dětsk(?:á|é|ou)\s*pornograf(?:ie|ii)|sexuální\s*zneužívání\s*dětí)(?![\p{L}\p{N}])/iu,
   /\b(hire\s+(a\s+)?hitman|contract\s+killing)\b/i,
   /\b(najmout\s+vraha|vražda\s+na\s+objednávku)\b/i
 ];
